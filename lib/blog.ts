@@ -65,3 +65,14 @@ export function getAllPosts(): Post[] {
 export function getPost(slug: string): Post | undefined {
   return getAllPosts().find((p) => p.slug === slug);
 }
+
+/**
+ * Ссылка на статью безопасна, только если статья уже опубликована.
+ * Для статей из очереди автопостинга отдаём листинг блога:
+ * после планового ребилда ссылка сама начнёт вести на статью.
+ */
+export function resolveBlogHref(href: string): string {
+  const m = href.match(/^\/blog\/([^/]+)\/?$/);
+  if (!m) return href;
+  return getPost(m[1]) ? href : '/blog/';
+}

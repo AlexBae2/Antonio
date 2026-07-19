@@ -7,6 +7,7 @@ import { QUESTIONS, getQuestion } from '@/lib/data/questions';
 import { SERVICES } from '@/lib/data/services';
 import { TARIFF_FACTS } from '@/lib/data/tariffFacts';
 import { absUrl } from '@/lib/site';
+import { resolveBlogHref } from '@/lib/blog';
 
 interface Params {
   slug: string;
@@ -89,7 +90,7 @@ export default async function QuestionPage({ params }: { params: Promise<Params>
         <ul className="mt-3 space-y-2 text-[15px]">
           {q.related.map((rel) => (
             <li key={rel.href}>
-              <Link href={rel.href} className="underline decoration-amber underline-offset-4 hover:text-amber-deep">
+              <Link href={resolveBlogHref(rel.href)} className="underline decoration-amber underline-offset-4 hover:text-amber-deep">
                 {rel.label}
               </Link>
             </li>

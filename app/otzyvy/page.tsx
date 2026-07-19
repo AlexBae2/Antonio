@@ -2,6 +2,7 @@ import type { Metadata } from 'next';
 import Link from 'next/link';
 import Breadcrumbs from '@/components/Breadcrumbs';
 import { absUrl, SITE_NAME } from '@/lib/site';
+import { resolveBlogHref } from '@/lib/blog';
 
 export const metadata: Metadata = {
   title: 'Отзывы курьеров: как мы их собираем и проверяем',
@@ -44,8 +45,8 @@ export default function OtzyvyPage() {
         <h2 className="font-display text-2xl font-semibold">Пока раздел наполняется</h2>
         <p className="mt-3 leading-relaxed">
           Что почитать о реальной стороне работы: честные разборы в блоге, например{' '}
-        <Link href="/blog/rabota-kurerom-v-kupere/" className="underline">про работу в Купере</Link> или{' '}
-          <Link href="/blog/sborshchik-zakazov-chto-za-rabota/" className="underline">
+        <Link href={resolveBlogHref('/blog/rabota-kurerom-v-kupere/')} className="underline">про работу в Купере</Link> или{' '}
+          <Link href={resolveBlogHref('/blog/sborshchik-zakazov-chto-za-rabota/')} className="underline">
             про будни сборщика заказов
           </Link>
           . Там мы разбираем и плюсы, и подводные камни.
