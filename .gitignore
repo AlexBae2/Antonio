@@ -1,0 +1,22 @@
+# deps / build
+node_modules/
+.next/
+out/
+*.tsbuildinfo
+next-env.d.ts
+
+# env / secrets
+.env
+.env.*
+!.env.example
+
+# db (server target)
+prisma/*.db
+prisma/*.db-journal
+data/leads.db
+
+# os / editor
+.DS_Store
+
+# local telegram export (not part of the site)
+telegram-export/

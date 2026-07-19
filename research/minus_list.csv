@@ -1,0 +1,130 @@
+phrase,category,exact_match
+курьер личный кабинет,deystvuyushchie_kuriery,false
+личный кабинет курьера,deystvuyushchie_kuriery,false
+вход в личный кабинет курьер,deystvuyushchie_kuriery,false
+курьер личный кабинет войти,deystvuyushchie_kuriery,false
+курьер приложение скачать,deystvuyushchie_kuriery,false
+приложение для курьеров скачать,deystvuyushchie_kuriery,false
+курьер приложение не работает,deystvuyushchie_kuriery,false
+курьер приложение не заходит,deystvuyushchie_kuriery,false
+курьер техподдержка,deystvuyushchie_kuriery,false
+курьер служба поддержки,deystvuyushchie_kuriery,false
+поддержка курьеров телефон,deystvuyushchie_kuriery,false
+написать в поддержку курьеров,deystvuyushchie_kuriery,false
+горячая линия курьер,deystvuyushchie_kuriery,false
+горячая линия курьеров,deystvuyushchie_kuriery,false
+номер горячей линии курьеров,deystvuyushchie_kuriery,false
+телефон горячей линии для курьеров,deystvuyushchie_kuriery,false
+курьер не платят,deystvuyushchie_kuriery,false
+не выплатили деньги курьер,deystvuyushchie_kuriery,false
+курьеру не пришли деньги,deystvuyushchie_kuriery,false
+курьер задержка выплат,deystvuyushchie_kuriery,false
+курьер долг,deystvuyushchie_kuriery,false
+курьер задолженность,deystvuyushchie_kuriery,false
+курьер вывод денег,deystvuyushchie_kuriery,false
+курьер баланс,deystvuyushchie_kuriery,false
+курьер начисления,deystvuyushchie_kuriery,false
+как уволиться курьером,deystvuyushchie_kuriery,false
+увольнение курьера,deystvuyushchie_kuriery,false
+курьер заявление на увольнение,deystvuyushchie_kuriery,false
+курьер как уйти с работы,deystvuyushchie_kuriery,false
+штраф курьер,deystvuyushchie_kuriery,false
+курьера оштрафовали,deystvuyushchie_kuriery,false
+за что штрафуют курьеров,deystvuyushchie_kuriery,false
+заблокировали курьера,deystvuyushchie_kuriery,false
+курьер аккаунт заблокирован,deystvuyushchie_kuriery,false
+как разблокировать аккаунт курьера,deystvuyushchie_kuriery,false
+курьера забанили,deystvuyushchie_kuriery,false
+слоты не дают курьер,deystvuyushchie_kuriery,false
+нет слотов курьер,deystvuyushchie_kuriery,false
+курьер бронирование слотов,deystvuyushchie_kuriery,false
+курьер слоты пропали,deystvuyushchie_kuriery,false
+чаевые курьер,deystvuyushchie_kuriery,false
+курьер чаевые как получить,deystvuyushchie_kuriery,false
+курьер жалоба,deystvuyushchie_kuriery,false
+курьер отзывы о работе,deystvuyushchie_kuriery,false
+курьер обманули с оплатой,deystvuyushchie_kuriery,false
+курьер график смен,deystvuyushchie_kuriery,false
+курьер не могу выбрать смену,deystvuyushchie_kuriery,false
+курьер условия работы отзывы,deystvuyushchie_kuriery,false
+"""яндекс про приложение курьер""",deystvuyushchie_kuriery,true
+"""яндекс про вход""",deystvuyushchie_kuriery,true
+"""яндекс еда курьер личный кабинет""",deystvuyushchie_kuriery,true
+"""яндекс еда курьер горячая линия""",deystvuyushchie_kuriery,true
+"""яндекс лавка курьер личный кабинет""",deystvuyushchie_kuriery,true
+"""купер курьер личный кабинет""",deystvuyushchie_kuriery,true
+"""купер горячая линия курьер""",deystvuyushchie_kuriery,true
+"""самокат курьер личный кабинет""",deystvuyushchie_kuriery,true
+"""самокат горячая линия курьер""",deystvuyushchie_kuriery,true
+"""вкусвилл курьер личный кабинет""",deystvuyushchie_kuriery,true
+"""сбермаркет курьер личный кабинет""",deystvuyushchie_kuriery,true
+"""х5 курьер личный кабинет""",deystvuyushchie_kuriery,true
+"""яндекс маркет сборщик личный кабинет""",deystvuyushchie_kuriery,true
+"""hh курьер вакансии""",chuzhie_agregatory,true
+"""hh.ru курьер""",chuzhie_agregatory,true
+"""headhunter курьер""",chuzhie_agregatory,true
+"""head hunter курьер""",chuzhie_agregatory,true
+"""вакансии курьер hh""",chuzhie_agregatory,true
+"""авито курьер вакансии""",chuzhie_agregatory,true
+"""авито работа курьер""",chuzhie_agregatory,true
+"""авито ру курьер""",chuzhie_agregatory,true
+"""суперджоб курьер""",chuzhie_agregatory,true
+"""superjob курьер""",chuzhie_agregatory,true
+"""rabota.ru курьер""",chuzhie_agregatory,true
+"""работа ру курьер""",chuzhie_agregatory,true
+"""зарплата ру курьер""",chuzhie_agregatory,true
+"""trudvsem курьер""",chuzhie_agregatory,true
+"""юла работа курьер""",chuzhie_agregatory,true
+доставка еды заказать,nerelevantnaya_dostavka,false
+заказать доставку еды,nerelevantnaya_dostavka,false
+заказать еду с доставкой,nerelevantnaya_dostavka,false
+вызвать курьера,nerelevantnaya_dostavka,false
+заказать курьера,nerelevantnaya_dostavka,false
+курьер документов разово,nerelevantnaya_dostavka,false
+курьерская доставка документов,nerelevantnaya_dostavka,false
+отправить документы курьером,nerelevantnaya_dostavka,false
+курьер для передачи документов,nerelevantnaya_dostavka,false
+курьерская служба доставки посылок,nerelevantnaya_dostavka,false
+отправить посылку курьером,nerelevantnaya_dostavka,false
+грузоперевозки курьер,nerelevantnaya_dostavka,false
+грузчики переезд,nerelevantnaya_dostavka,false
+грузовое такси,nerelevantnaya_dostavka,false
+транспортная компания доставка грузов,nerelevantnaya_dostavka,false
+международная доставка курьер,nerelevantnaya_dostavka,false
+курьер по россии доставка,nerelevantnaya_dostavka,false
+доставка суши заказать,nerelevantnaya_dostavka,false
+доставка пиццы заказать,nerelevantnaya_dostavka,false
+доставка цветов заказать,nerelevantnaya_dostavka,false
+доставка мебели заказать,nerelevantnaya_dostavka,false
+курьер для бизнеса заказать доставку,nerelevantnaya_dostavka,false
+служба доставки для интернет магазина заказать,nerelevantnaya_dostavka,false
+курьер с 12 лет,nesovershennoletnie,false
+курьер с 13 лет,nesovershennoletnie,false
+курьер с 14 лет,nesovershennoletnie,false
+работа курьером с 14 лет,nesovershennoletnie,false
+работать курьером с 14 лет,nesovershennoletnie,false
+подработка курьером с 14 лет,nesovershennoletnie,false
+курьер для подростков,nesovershennoletnie,false
+работа для подростков курьер,nesovershennoletnie,false
+курьер школьникам,nesovershennoletnie,false
+вакансии для несовершеннолетних курьер,nesovershennoletnie,false
+курьер 15 лет,nesovershennoletnie,false
+курьер летом для подростков,nesovershennoletnie,false
+курьер реферат,info_musor,false
+курьер сочинение,info_musor,false
+профессия курьер сочинение,info_musor,false
+эссе про курьера,info_musor,false
+курьер доклад,info_musor,false
+кем стать курьером сочинение,info_musor,false
+курьер презентация,info_musor,false
+курьер мем,info_musor,false
+курьер прикол,info_musor,false
+курьер картинки,info_musor,false
+курьер раскраска,info_musor,false
+игра курьер,info_musor,false
+курьер симулятор игра,info_musor,false
+курьер онлайн игра скачать,info_musor,false
+курьер значение слова,info_musor,false
+кто такой курьер определение,info_musor,false
+курьер профессия история,info_musor,false
+курьер вектор иконка,info_musor,false

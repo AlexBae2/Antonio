@@ -1,0 +1,100 @@
+@import 'tailwindcss';
+
+@theme {
+  /* Палитра: «честная рабочая» - тёплая бумага, графит, янтарь доставки */
+  --color-paper: #faf8f5;
+  --color-card: #ffffff;
+  --color-ink: #1c1b1a;
+  --color-ink-soft: #55524c;
+  --color-graphite: #201e1b;
+  --color-amber: #ff6b1a;
+  --color-amber-deep: #e85a0d;
+  --color-amber-soft: #fff1e6;
+  --color-money: #1f9d55;
+  --color-money-soft: #e8f6ee;
+  --color-line: #e7e2da;
+  --color-line-dark: #37342f;
+
+  --font-display: var(--font-unbounded), system-ui, sans-serif;
+  --font-sans: var(--font-golos), system-ui, sans-serif;
+
+  --radius-card: 1rem;
+
+  --shadow-card: 0 1px 2px rgb(28 27 26 / 0.05), 0 4px 16px rgb(28 27 26 / 0.06);
+  --shadow-lift: 0 2px 4px rgb(28 27 26 / 0.08), 0 12px 32px rgb(28 27 26 / 0.12);
+}
+
+html {
+  scroll-behavior: smooth;
+}
+
+body {
+  background: var(--color-paper);
+  color: var(--color-ink);
+  font-family: var(--font-sans);
+  -webkit-font-smoothing: antialiased;
+  text-rendering: optimizeLegibility;
+}
+
+/* Дисплейные заголовки */
+.font-display {
+  font-family: var(--font-display);
+  letter-spacing: -0.01em;
+}
+
+/* Пунктирный маршрут - фирменный мотив */
+.route-line {
+  background-image: linear-gradient(to right, var(--color-amber) 55%, transparent 45%);
+  background-size: 14px 3px;
+  background-repeat: repeat-x;
+  background-position: left center;
+  height: 3px;
+  border-radius: 2px;
+}
+
+.route-dot {
+  width: 10px;
+  height: 10px;
+  border-radius: 9999px;
+  background: var(--color-amber);
+  box-shadow: 0 0 0 4px var(--color-amber-soft);
+}
+
+/* Зернистость бумаги для атмосферы (едва заметная) */
+.grain::before {
+  content: '';
+  position: absolute;
+  inset: 0;
+  pointer-events: none;
+  opacity: 0.35;
+  background-image: url("data:image/svg+xml,%3Csvg viewBox='0 0 200 200' xmlns='http://www.w3.org/2000/svg'%3E%3Cfilter id='n'%3E%3CfeTurbulence type='fractalNoise' baseFrequency='0.9' numOctaves='2' stitchTiles='stitch'/%3E%3CfeColorMatrix type='saturate' values='0'/%3E%3CfeComponentTransfer%3E%3CfeFuncA type='linear' slope='0.04'/%3E%3C/feComponentTransfer%3E%3C/filter%3E%3Crect width='100%25' height='100%25' filter='url(%23n)'/%3E%3C/svg%3E");
+}
+
+/* Staggered reveal при загрузке */
+@media (prefers-reduced-motion: no-preference) {
+  .reveal {
+    opacity: 0;
+    transform: translateY(12px);
+    animation: reveal 0.55s cubic-bezier(0.22, 1, 0.36, 1) forwards;
+  }
+  .reveal-1 { animation-delay: 0.05s; }
+  .reveal-2 { animation-delay: 0.14s; }
+  .reveal-3 { animation-delay: 0.23s; }
+  .reveal-4 { animation-delay: 0.32s; }
+
+  @keyframes reveal {
+    to {
+      opacity: 1;
+      transform: translateY(0);
+    }
+  }
+}
+
+@media (prefers-reduced-motion: reduce) {
+  .reveal { opacity: 1; }
+}
+
+/* Крупные тач-таргеты для мобильных */
+.tap {
+  min-height: 48px;
+}
