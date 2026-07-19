@@ -2,6 +2,7 @@ import type { Metadata } from 'next';
 import Link from 'next/link';
 import { notFound } from 'next/navigation';
 import { MDXRemote } from 'next-mdx-remote/rsc';
+import remarkGfm from 'remark-gfm';
 import Breadcrumbs from '@/components/Breadcrumbs';
 import JsonLd from '@/components/JsonLd';
 import LeadForm from '@/components/LeadForm';
@@ -94,7 +95,11 @@ export default async function PostPage({ params }: { params: Promise<Params> }) 
           </div>
           <h1 className="mt-3 font-display text-3xl font-bold leading-tight md:text-4xl">{post.h1}</h1>
           <div className="mt-2">
-            <MDXRemote source={post.content} components={mdxComponents} />
+            <MDXRemote
+              source={post.content}
+              components={mdxComponents}
+              options={{ mdxOptions: { remarkPlugins: [remarkGfm] } }}
+            />
           </div>
           <p className="mt-8 rounded-2xl border border-line bg-card p-4 text-sm text-ink-soft">
             Материал подготовлен редакцией {SITE_NAME} по открытым данным сервисов. Мы независимый
