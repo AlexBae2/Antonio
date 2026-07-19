@@ -10,6 +10,8 @@ export interface Service {
   /** Номинативное упоминание бренда: только в H1/title/тексте, никогда в URL */
   brand: string;
   brandShort: string;
+  /** предложный падеж: "в Яндекс Еде" */
+  brandLoc: string;
   /** Нейтральное название категории работы - используется в слаге и навигации */
   category: string;
   role: 'courier' | 'picker';
@@ -31,6 +33,7 @@ export const SERVICES: Service[] = [
   {
     slug: 'kurier-dostavka-edy',
     brand: 'Яндекс Еда',
+    brandLoc: 'в Яндекс Еде',
     brandShort: 'Яндекс Еда',
     category: 'Доставка еды из ресторанов',
     role: 'courier',
@@ -71,6 +74,7 @@ export const SERVICES: Service[] = [
   {
     slug: 'kurier-produkty-darkstore',
     brand: 'Яндекс Лавка',
+    brandLoc: 'в Яндекс Лавке',
     brandShort: 'Лавка',
     category: 'Доставка продуктов из даркстора',
     role: 'courier',
@@ -107,6 +111,7 @@ export const SERVICES: Service[] = [
   {
     slug: 'kurier-zakazy-iz-magazinov',
     brand: 'Купер',
+    brandLoc: 'в Купере',
     brandShort: 'Купер',
     category: 'Доставка заказов из магазинов',
     role: 'courier',
@@ -143,6 +148,7 @@ export const SERVICES: Service[] = [
   {
     slug: 'kurier-express-dostavka',
     brand: 'Самокат',
+    brandLoc: 'в Самокате',
     brandShort: 'Самокат',
     category: 'Экспресс-доставка продуктов',
     role: 'courier',
@@ -179,6 +185,7 @@ export const SERVICES: Service[] = [
   {
     slug: 'sborshchik-marketpleys',
     brand: 'Яндекс Маркет',
+    brandLoc: 'в Яндекс Маркете',
     brandShort: 'Маркет',
     category: 'Сборка заказов на складе маркетплейса',
     role: 'picker',
@@ -215,6 +222,7 @@ export const SERVICES: Service[] = [
   {
     slug: 'kurier-zdorovoe-pitanie',
     brand: 'ВкусВилл',
+    brandLoc: 'во ВкусВилле',
     brandShort: 'ВкусВилл',
     category: 'Доставка продуктов из магазинов сети',
     role: 'courier',
@@ -247,6 +255,7 @@ export const SERVICES: Service[] = [
   {
     slug: 'kurier-produktovye-seti',
     brand: 'X5 (Пятёрочка, Перекрёсток)',
+    brandLoc: 'в X5',
     brandShort: 'X5',
     category: 'Доставка из продуктовых сетей',
     role: 'courier',

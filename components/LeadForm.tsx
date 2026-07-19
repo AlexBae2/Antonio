@@ -1,5 +1,6 @@
 'use client';
 
+import Link from 'next/link';
 import { useEffect, useMemo, useRef, useState } from 'react';
 import { CITIES } from '@/lib/data/cities';
 import { SERVICES } from '@/lib/data/services';
@@ -115,7 +116,7 @@ export default function LeadForm() {
     draftSent.current = true;
     try {
       const body = JSON.stringify(payload('partial'));
-      navigator.sendBeacon?.('/api/lead', new Blob([body], { type: 'application/json' }));
+      navigator.sendBeacon?.('/api/lead/', new Blob([body], { type: 'application/json' }));
     } catch {
       /* partial - best effort */
     }
@@ -161,7 +162,7 @@ export default function LeadForm() {
       if (IS_DEMO) {
         await new Promise((r) => setTimeout(r, 600));
       } else {
-        const res = await fetch('/api/lead', {
+        const res = await fetch('/api/lead/', {
           method: 'POST',
           headers: { 'Content-Type': 'application/json' },
           body: JSON.stringify(payload('new')),
@@ -340,9 +341,9 @@ export default function LeadForm() {
                 />
                 <span>
                   Соглашаюсь на обработку персональных данных по{' '}
-                  <a href="/policy/" className="underline" target="_blank">
+                  <Link href="/policy/" className="underline" target="_blank">
                     политике конфиденциальности
-                  </a>
+                  </Link>
                 </span>
               </label>
               <button
@@ -381,9 +382,9 @@ export default function LeadForm() {
             <p className="mx-auto mt-2 max-w-sm text-sm text-ink-soft">
               Сервисы доставки подключают курьеров с 18 лет: это их требование, обойти его нельзя.
               Возвращайтесь после дня рождения, а пока почитайте,{' '}
-              <a href="/blog/so-skolki-let-mozhno-rabotat-kurerom/" className="underline">
+              <Link href="/blog/so-skolki-let-mozhno-rabotat-kurerom/" className="underline">
                 со скольки лет и куда берут
-              </a>
+              </Link>
               .
             </p>
           </div>

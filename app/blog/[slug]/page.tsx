@@ -58,9 +58,14 @@ const mdxComponents = {
   ol: (props: React.ComponentProps<'ol'>) => (
     <ol {...props} className="mt-4 list-decimal space-y-2 pl-5 leading-relaxed" />
   ),
-  a: (props: React.ComponentProps<'a'>) => (
-    <a {...props} className="underline decoration-amber underline-offset-4 hover:text-amber-deep" />
-  ),
+  a: ({ href, ...props }: React.ComponentProps<'a'>) => {
+    const cls = 'underline decoration-amber underline-offset-4 hover:text-amber-deep';
+    // внутренние ссылки через Link: иначе на стенде потеряется basePath
+    if (href && href.startsWith('/')) {
+      return <Link {...props} href={href} className={cls} />;
+    }
+    return <a {...props} href={href} className={cls} />;
+  },
 };
 
 export default async function PostPage({ params }: { params: Promise<Params> }) {

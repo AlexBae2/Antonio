@@ -32,17 +32,17 @@ export default function ServiceView({ service }: { service: Service }) {
       <div className="mt-4 grid gap-8 lg:grid-cols-[1fr_400px]">
         <div>
           <h1 className="font-display text-3xl font-bold leading-tight md:text-4xl">
-            {service.role === 'picker' ? 'Работа сборщиком заказов' : 'Работа курьером'} в {service.brand}:
+            {service.role === 'picker' ? 'Работа сборщиком заказов' : 'Работа курьером'} {service.brandLoc}:
             как устроиться и что по деньгам
           </h1>
 
           {/* Прямой ответ первым абзацем: извлекаемость для LLM и быстрых ответов */}
           <p className="mt-4 text-lg leading-relaxed">
-            {service.role === 'picker' ? 'Сборщик заказов' : 'Курьер'} {service.brand} — это{' '}
-            {service.cooperation.charAt(0).toLowerCase() + service.cooperation.slice(1)} Возраст от{' '}
-            {service.minAge} лет, оплата за {service.role === 'picker' ? 'смены' : 'выполненные заказы'},
-            выплаты еженедельно. Подключение бесплатное: помогаем оформить документы и выйти на первую
-            смену, как правило, на следующий день после заявки.
+            Работа {service.role === 'picker' ? 'сборщиком заказов' : 'курьером'} {service.brandLoc} —
+            это оплата за {service.role === 'picker' ? 'смены на складе' : 'выполненные заказы'},
+            гибкий график и еженедельные выплаты. Подключение с {service.minAge} лет.{' '}
+            {service.cooperation} Для соискателя всё бесплатно: помогаем оформить документы и выйти на
+            первую смену, как правило, на следующий день после заявки.
           </p>
 
           <div className="mt-4">

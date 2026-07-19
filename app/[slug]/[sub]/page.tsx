@@ -30,8 +30,8 @@ export async function generateMetadata({ params }: { params: Promise<Params> }):
   if (!city || !service) return {};
   const kind = service.role === 'picker' ? 'сборщиком' : 'курьером';
   return {
-    title: `${city.name}: работа ${kind} в ${service.brand} — условия и подключение ${SITE_YEAR}`,
-    description: `Как устроиться ${kind} в ${service.brand} ${city.namePrepositional}: требования от ${service.minAge} лет, оформление за 1-2 дня, еженедельные выплаты. Бесплатно для соискателя.`,
+    title: `${city.name}: работа ${kind} ${service.brandLoc} — условия и подключение ${SITE_YEAR}`,
+    description: `Как устроиться ${kind} ${service.brandLoc} ${city.namePrepositional}: требования от ${service.minAge} лет, оформление за 1-2 дня, еженедельные выплаты. Бесплатно для соискателя.`,
     alternates: { canonical: absUrl(`/${slug}/${sub}/`) },
   };
 }
@@ -74,11 +74,11 @@ export default async function CityServicePage({ params }: { params: Promise<Para
       <div className="mt-4 grid gap-8 lg:grid-cols-[1fr_400px]">
         <div>
           <h1 className="font-display text-3xl font-bold leading-tight md:text-4xl">
-            {city.name}: работа {kind} в {service.brand}
+            {city.name}: работа {kind} {service.brandLoc}
           </h1>
 
           <p className="mt-4 text-lg leading-relaxed">
-            Устроиться {kind} в {service.brand} {city.namePrepositional} можно с {service.minAge} лет:
+            Устроиться {kind} {service.brandLoc} {city.namePrepositional} можно с {service.minAge} лет:
             подключение занимает 1-2 дня, оплата за{' '}
             {service.role === 'picker' ? 'смены' : 'выполненные заказы'} с еженедельными выплатами.{' '}
             {city.localNote}
@@ -121,7 +121,7 @@ export default async function CityServicePage({ params }: { params: Promise<Para
               </li>
               <li>
                 <Link href={`/${service.slug}/`} className="underline decoration-amber underline-offset-4 hover:text-amber-deep">
-                  Подробнее о работе в {service.brandShort}: полные условия
+                  Подробнее о работе {service.brandLoc}: полные условия
                 </Link>
               </li>
               <li>

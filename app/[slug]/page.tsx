@@ -29,8 +29,8 @@ export async function generateMetadata({ params }: { params: Promise<Params> }):
   if (service) {
     const kind = service.role === 'picker' ? 'сборщиком заказов' : 'курьером';
     return {
-      title: `Работа ${kind} в ${service.brand}: вакансии, условия, выплаты ${SITE_YEAR}`,
-      description: `Как устроиться ${kind} в ${service.brand}: требования от ${service.minAge} лет, оформление, еженедельные выплаты. Заявка за 2 минуты, перезвоним за 30 минут. Бесплатно.`,
+      title: `Работа ${kind} ${service.brandLoc}: вакансии, условия, выплаты ${SITE_YEAR}`,
+      description: `Как устроиться ${kind} ${service.brandLoc}: требования от ${service.minAge} лет, оформление, еженедельные выплаты. Заявка за 2 минуты, перезвоним за 30 минут. Бесплатно.`,
       alternates: { canonical: absUrl(`/${slug}/`) },
     };
   }
