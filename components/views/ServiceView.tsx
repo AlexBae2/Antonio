@@ -8,6 +8,7 @@ import LeadForm from '@/components/LeadForm';
 import type { Service } from '@/lib/data/services';
 import { SERVICES } from '@/lib/data/services';
 import { CITIES } from '@/lib/data/cities';
+import { TARIFF_FACTS } from '@/lib/data/tariffFacts';
 
 const CONNECTION_LABEL: Record<Service['connection'], string> = {
   direct: 'прямое подключение к сервису',
@@ -57,8 +58,45 @@ export default function ServiceView({ service }: { service: Service }) {
             <p className="mt-3 leading-relaxed text-ink-soft">
               Формат: {CONNECTION_LABEL[service.connection]}. {service.cooperation}
             </p>
-            <p className="mt-2 leading-relaxed text-ink-soft">{service.incomeNote}</p>
           </section>
+
+          {TARIFF_FACTS[service.slug] && (
+            <section className="mt-8">
+              <h2 className="font-display text-2xl font-semibold">Что по деньгам: цифры сервиса</h2>
+              <p className="mt-2 text-sm font-semibold text-money">{TARIFF_FACTS[service.slug].headline}</p>
+              <div className="mt-3 overflow-x-auto">
+                <table className="w-full min-w-[480px] border-collapse text-sm">
+                  <caption className="sr-only">Официальные цифры сервиса {service.brand}</caption>
+                  <thead>
+                    <tr className="border-b-2 border-line text-left">
+                      <th className="py-2 pr-3 font-semibold">Условие</th>
+                      <th className="py-2 font-semibold">Источник</th>
+                    </tr>
+                  </thead>
+                  <tbody>
+                    {TARIFF_FACTS[service.slug].facts.map((fact) => (
+                      <tr key={fact.source + fact.text.slice(0, 20)} className="border-b border-line align-top">
+                        <td className="py-2 pr-3 leading-relaxed">{fact.text}</td>
+                        <td className="py-2 text-xs text-ink-soft">
+                          {fact.source}
+                          {!fact.verified && ' (проверяется)'}
+                        </td>
+                      </tr>
+                    ))}
+                  </tbody>
+                </table>
+              </div>
+              <p className="mt-2 text-xs text-ink-soft">
+                Данные на: {TARIFF_FACTS[service.slug].date}. Цифры заявлены сервисом и не являются
+                гарантией дохода: итог зависит от города, графика и темпа работы.{' '}
+                {TARIFF_FACTS[service.slug].note || ''} Методика:{' '}
+                <Link href="/metodologiya/" className="underline">
+                  откуда цифры
+                </Link>
+                .
+              </p>
+            </section>
+          )}
 
           <section className="mt-8">
             <h2 className="font-display text-2xl font-semibold">Требования</h2>

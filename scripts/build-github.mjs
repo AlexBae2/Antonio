@@ -5,17 +5,29 @@
  * поэтому на время сборки папка api переносится в сторону.
  */
 import { execSync } from 'node:child_process';
-import { existsSync, renameSync, writeFileSync } from 'node:fs';
+import { existsSync, renameSync, rmSync, writeFileSync } from 'node:fs';
 import { join } from 'node:path';
 
 const root = process.cwd();
-const apiDir = join(root, 'app', 'api');
-const apiTmp = join(root, '.api-excluded');
 
-const hasApi = existsSync(apiDir);
+// Server-only части (route handlers, server actions, sqlite) несовместимы
+// со статическим экспортом - на время сборки уводим их из app/
+const EXCLUDED = [
+  { dir: join(root, 'app', 'api'), tmp: join(root, '.excluded-api') },
+  { dir: join(root, 'app', 'admin'), tmp: join(root, '.excluded-admin') },
+];
+
+const moved = [];
 
 try {
-  if (hasApi) renameSync(apiDir, apiTmp);
+  // .next нельзя переиспользовать между output: export и standalone
+  rmSync(join(root, '.next'), { recursive: true, force: true });
+  for (const { dir, tmp } of EXCLUDED) {
+    if (existsSync(dir)) {
+      renameSync(dir, tmp);
+      moved.push({ dir, tmp });
+    }
+  }
   execSync('next build', {
     stdio: 'inherit',
     env: { ...process.env, DEPLOY_TARGET: 'github' },
@@ -23,5 +35,7 @@ try {
   // .nojekyll: без него Pages/Jekyll режет _next/*
   writeFileSync(join(root, 'out', '.nojekyll'), '');
 } finally {
-  if (hasApi && existsSync(apiTmp)) renameSync(apiTmp, apiDir);
+  for (const { dir, tmp } of moved) {
+    if (existsSync(tmp)) renameSync(tmp, dir);
+  }
 }

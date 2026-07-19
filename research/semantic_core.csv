@@ -1,0 +1,315 @@
+phrase,freq,intent,target_page
+работа курьером,192173,transactional,role-slug
+вакансии курьер,38754,transactional,role-slug
+курьер вакансии,38754,transactional,role-slug
+подработка курьером,9601,transactional,role-slug
+устроиться курьером,49467,transactional,role-slug
+курьер устроиться на работу,3994,transactional,role-slug
+работа курьером отзывы,16544,info-short,role-slug
+работа курьером вакансии,2102,transactional,role-slug
+работа курьером в доставке,4777,transactional,role-slug
+курьер доставка вакансии,2822,transactional,role-slug
+работа курьером ежедневная оплата,469,transactional,role-slug
+вакансии курьера с ежедневной оплатой,951,transactional,role-slug
+курьер вакансии ежедневная,1096,transactional,role-slug
+подработка курьером ежедневно,594,transactional,role-slug
+подработка курьером отзывы,277,info-short,role-slug
+подработка свободным курьером,319,transactional,role-slug
+подработка курьером с 14 лет,303,transactional,voprosy
+подработка курьером с 16 лет,190,transactional,voprosy
+подработка курьер еда,277,transactional,role-slug
+год работы курьером,8777,info-long,blog
+сколько получают курьеры,12224,transactional,calc
+сколько получает курьер за доставку,892,transactional,calc
+сколько в среднем получают курьеры,874,transactional,calc
+сколько получает курьер за один заказ,781,transactional,calc
+сколько получают курьеры в день,729,transactional,calc
+сколько получают курьеры в час,554,transactional,calc
+сколько получают курьеры в москве,514,transactional,geo
+сколько зарабатывают курьеры на авто,982,transactional,calc
+подработка курьером вечером,73,transactional,role-slug
+работа сборщиком заказов,13290,transactional,role-slug
+вакансии сборщик заказов,14898,transactional,role-slug
+сборщик заказов вакансии,14898,transactional,role-slug
+сборщик заказов отзывы о работе,1220,info-short,role-slug
+работа сборщиком заказов вакансии,496,transactional,role-slug
+работа сборщик заказов склад,247,transactional,role-slug
+устроиться на работу сборщиком заказов,211,transactional,role-slug
+работа сборщиком заказов с 16,195,transactional,voprosy
+работа кладовщиком,17242,transactional,role-slug
+вакансии кладовщик,17242,transactional,role-slug
+работа кладовщиком свежие вакансии,1170,transactional,role-slug
+работа кладовщиком вахта,908,transactional,role-slug
+работа кладовщиком на складе,527,transactional,role-slug
+работа кладовщик женщина,541,info-short,voprosy
+работа кладовщик комплектовщик,408,transactional,role-slug
+опыт работы кладовщика,345,info-long,voprosy
+ищу работу кладовщика,306,transactional,role-slug
+пеший курьер вакансии,3462,transactional,role-slug
+пеший курьер подработка,724,transactional,role-slug
+работа пешим курьером,7026,transactional,role-slug
+как устроиться пешим курьером,1283,info-long,blog
+сколько получает пеший курьер,1118,transactional,calc
+вакансии пеший курьер в москве,895,transactional,geo
+авто курьер,29258,transactional,role-slug
+курьер на своем авто,7524,transactional,role-slug
+курьер на личном авто,7244,transactional,role-slug
+работа курьером на своем авто,2861,transactional,role-slug
+работа курьером на личном авто,2382,transactional,role-slug
+курьер на авто компании,2328,transactional,role-slug
+курьер на личном авто вакансии,779,transactional,role-slug
+курьер на своем авто вакансии,483,transactional,role-slug
+курьер на своем авто отзывы,1232,info-short,role-slug
+заработать на авто курьером,1091,transactional,calc
+водитель курьер вакансии,1544,transactional,role-slug
+курьер на своем легковом авто вакансии,26,transactional,role-slug
+вакансии курьера в спб на своем авто,12,transactional,geo
+подработка курьером на своем авто,210,transactional,role-slug
+подработка курьером на своем авто москва,20,transactional,geo
+вело курьер,2587,transactional,role-slug
+курьер на вело,647,transactional,role-slug
+вело доставка курьер,312,transactional,role-slug
+вело курьер яндекс еды,226,transactional,service-slug
+сколько зарабатывают вело курьеры,109,transactional,calc
+яндекс курьер вело,702,transactional,service-slug
+х5 курьер вело,109,transactional,service-slug
+пятерочка курьер вело,64,transactional,service-slug
+купер курьер велосипед,272,transactional,service-slug
+курьер вкусвилл велосипед,190,transactional,service-slug
+сборщик заказов работа,13290,transactional,role-slug
+сборщик комплектовщик яндекс маркет,14,transactional,service-slug
+курьер с 16 лет,4885,transactional,voprosy
+яндекс курьер с 16 лет,1468,transactional,voprosy
+работа курьером с 16 лет,1318,transactional,voprosy
+можно работать курьером с 16 лет,983,info-short,voprosy
+курьер еды с 16 лет,718,transactional,voprosy
+курьер яндекс еды с 16 лет,701,transactional,voprosy
+устроиться курьером с 16 лет,411,transactional,voprosy
+курьер с 16 лет вакансии,274,transactional,voprosy
+работа курьером яндекс,67288,transactional,service-slug
+яндекс еда работа курьером,8354,transactional,service-slug
+яндекс еда устроиться курьером,5810,transactional,service-slug
+как устроиться курьером в яндекс,4736,info-long,blog
+яндекс доставка работа курьером,7539,transactional,service-slug
+яндекс доставка устроиться курьером,2989,transactional,service-slug
+курьер яндекс устроиться на работу,1635,transactional,service-slug
+как устроиться курьером еды,1571,info-long,blog
+сколько получает курьер яндекс,3703,transactional,calc
+сколько получают курьеры еды,1656,transactional,calc
+сколько получает курьер яндекс еда,1564,transactional,calc
+сколько получает пеший курьер яндекс,547,transactional,calc
+сколько получают курьеры в яндекс доставке,403,transactional,calc
+яндекс курьер на авто,4968,transactional,service-slug
+авто курьер яндекс доставки,2159,transactional,service-slug
+работа яндекс курьер на авто,1471,transactional,service-slug
+курьер на личном авто яндекс,1170,transactional,service-slug
+яндекс курьер на авто отзывы,843,info-short,service-slug
+самозанятый курьер яндекс,3205,transactional,service-slug
+самозанятый курьер яндекс еда,955,transactional,service-slug
+самозанятый курьер налог,992,info-long,blog
+как работают самозанятые курьеры,459,info-long,blog
+выплаты курьер самозанятый,452,info-short,voprosy
+работа курьером самозанятый,715,transactional,service-slug
+яндекс еда работа курьером спб,56,transactional,geo
+работа курьером яндекс еда москва,90,transactional,geo
+курьер яндекс лавка,18542,transactional,service-slug
+яндекс лавка работа курьером,3017,transactional,service-slug
+яндекс лавка курьер устроиться,2237,transactional,service-slug
+яндекс лавка стать курьером,2148,transactional,service-slug
+яндекс еда лавка курьер,701,transactional,service-slug
+яндекс лавка доставка курьеры,660,transactional,service-slug
+яндекс лавка курьер отзывы,541,info-short,service-slug
+яндекс лавка курьер со скольки лет,490,transactional,voprosy
+сколько зарабатывают курьеры яндекс лавки,474,transactional,calc
+яндекс лавка спб курьер,315,transactional,geo
+яндекс лавка пеший курьер,295,transactional,service-slug
+яндекс лавка курьер москва,270,transactional,geo
+яндекс лавка казань работа курьером,7,transactional,geo
+сборщик заказов яндекс лавка,3632,transactional,service-slug
+яндекс лавка сборщик заказов вакансии,474,transactional,service-slug
+яндекс лавка сборщик заказов отзывы,381,info-short,service-slug
+работа в яндекс лавке сборщик заказов,306,transactional,service-slug
+сборщик заказов яндекс лавка спб,191,transactional,geo
+сборщик заказов яндекс лавка москва,113,transactional,geo
+как устроиться в яндекс лавку сборщик заказов,90,info-long,blog
+яндекс лавка сборщик заказов екатеринбург,85,transactional,geo
+сборщик заказов яндекс лавка новосибирск,69,transactional,geo
+яндекс лавка сборщик заказов со скольки лет,61,transactional,voprosy
+яндекс лавка сборщик заказов казань,54,transactional,geo
+яндекс лавка подработка сборщик заказов,52,transactional,service-slug
+сборщик заказов яндекс лавка сколько платят,47,transactional,calc
+работа кладовщиком лавка,509,transactional,service-slug
+курьер купер,16909,transactional,service-slug
+купер курьер работа,4374,transactional,service-slug
+курьер купер доставка,1985,transactional,service-slug
+купер отзывы курьеров,1667,info-short,service-slug
+купер устроиться курьером,1433,transactional,service-slug
+пеший курьер купер,818,transactional,service-slug
+купер стать курьером,706,info-long,blog
+купер курьер на авто,702,transactional,service-slug
+купер работа курьером отзывы,696,info-short,service-slug
+работать курьером в купере,648,transactional,service-slug
+купер курьер со скольки лет,430,transactional,voprosy
+сколько зарабатывают курьеры купер,388,transactional,calc
+купер работа курьером спб,55,transactional,geo
+работа курьером казань купер,21,transactional,geo
+сборщик заказов купер,8231,transactional,service-slug
+купер работа сборщик заказов,1757,transactional,service-slug
+купер сборщик заказов отзывы,1318,info-short,service-slug
+купер сборщик заказов вакансия,794,transactional,service-slug
+купер сборщик заказов со скольки лет,356,transactional,voprosy
+купер устроиться сборщиком заказов,219,transactional,service-slug
+сборщик заказов купер что делает,162,info-long,voprosy
+сборщик заказов купер зарплата,148,transactional,calc
+сборщик заказов купер с 16 лет,131,transactional,voprosy
+сборщик заказов купер екатеринбург,97,transactional,geo
+сборщик заказов купер спб,87,transactional,geo
+сборщик заказов купер новосибирск,83,transactional,geo
+сборщик заказов купер москва,83,transactional,geo
+курьер самокат,36272,transactional,service-slug
+самокат работа курьером,7111,transactional,service-slug
+самокат курьер устроиться,3999,transactional,service-slug
+самокат работать курьером,2718,transactional,service-slug
+самокат доставка курьер,2433,transactional,service-slug
+сколько зарабатывают курьеры самокат,1422,transactional,calc
+курьер самокат отзывы,1385,info-short,service-slug
+курьер самокат со скольки лет,1360,transactional,voprosy
+самокат работа курьером спб,264,transactional,geo
+самокат работа курьером казань,46,transactional,geo
+самокат сборщик заказов,8312,transactional,service-slug
+сборщик заказов самокат вакансии,1450,transactional,service-slug
+самокат работа сборщик заказов,1308,transactional,service-slug
+сборщик заказов самокат отзывы,1111,info-short,service-slug
+сборщик заказов самокат спб,241,transactional,geo
+сборщик заказов самокат москва,163,transactional,geo
+сборщик заказов самокат новосибирск,136,transactional,geo
+сборщик заказов самокат сколько платят,125,transactional,calc
+сборщик заказов самокат со скольки лет,117,transactional,voprosy
+самокат подработка сборщиком заказов,105,transactional,service-slug
+ставка сборщика заказов самокат,91,transactional,calc
+сборщик заказов самокат екатеринбург,88,transactional,geo
+курьер вкусвилл,9494,transactional,service-slug
+вкусвилл работа курьером,2089,transactional,service-slug
+вкусвилл курьер отзывы,902,info-short,service-slug
+вкусвилл доставка курьер,896,transactional,service-slug
+вкусвилл вакансии курьер,604,transactional,service-slug
+вкусвилл курьер авто,541,transactional,service-slug
+вкусвилл устроиться курьером,413,transactional,service-slug
+вкусвилл курьер на личном авто,295,transactional,service-slug
+курьер вкусвилл москва,270,transactional,geo
+вкусвилл курьер со скольки лет,263,transactional,voprosy
+курьер вкусвилл спб,262,transactional,geo
+сколько зарабатывают курьеры вкусвилл,249,transactional,calc
+стать курьером вкусвилл,161,info-long,blog
+вкусвилл работа курьером спб,91,transactional,geo
+сборщик заказов вкусвилл,5371,transactional,service-slug
+сборщик заказов вкусвилл отзывы,1013,info-short,service-slug
+вкусвилл сборщик заказов вакансии,821,transactional,service-slug
+сборщик заказов вкусвилл москва,311,transactional,geo
+работа во вкусвилл сборщик заказов,243,transactional,service-slug
+сборщик заказов вкусвилл со скольки лет,181,transactional,voprosy
+склад сборщик заказов вкусвилл,139,transactional,service-slug
+сборщик заказов вкусвилл зарплата,124,transactional,calc
+сборщик заказов вкусвилл спб,94,transactional,geo
+сборщик заказов вкусвилл подработка,87,transactional,service-slug
+сборщик заказов вкусвилл даркстор,64,transactional,service-slug
+сборщик яндекс маркет,296,transactional,service-slug
+сборщик заказов яндекс маркет,171,transactional,service-slug
+яндекс маркет сборщик отзывы,44,info-short,service-slug
+яндекс маркет вакансия сборщик,43,transactional,service-slug
+сборщик склад яндекс маркет,28,transactional,service-slug
+яндекс маркет работа сборщиком,26,transactional,service-slug
+яндекс маркет вакансии склад,581,transactional,service-slug
+яндекс маркет вакансии на складе,156,transactional,service-slug
+яндекс маркет склад казань вакансии,50,transactional,geo
+вакансия яндекс маркет склад екатеринбург,43,transactional,geo
+склад яндекс маркет в москве вакансии,32,transactional,geo
+склад яндекс маркет в спб вакансии,7,transactional,geo
+сборщик заказов пятерочка,9581,transactional,service-slug
+пятерочка сборщик заказов,16164,transactional,service-slug
+пятерочка сборщик заказов вакансия,1236,transactional,service-slug
+сборщик заказов пятерочка отзывы,931,info-short,service-slug
+работа сборщиком заказов в пятерочке,700,transactional,service-slug
+сборщик заказов пятерочка зарплата,394,transactional,calc
+сборщик заказов пятерочка со скольки лет,334,transactional,voprosy
+что делает сборщик заказов в пятерочке,215,info-long,voprosy
+сборщик заказов магазин пятерочка,163,transactional,service-slug
+сборщик заказов пятерочка спб,133,transactional,geo
+как устроиться сборщиком заказов в пятерочку,131,info-long,blog
+сборщик заказов пятерочка москва,114,transactional,geo
+обязанности сборщика заказов в пятерочке,92,info-long,voprosy
+сборщик заказов пятерочка подработка,85,transactional,service-slug
+курьер в пятерочку на своем авто вакансии,51,transactional,service-slug
+работа сборщиком заказов в перекрестке,595,transactional,service-slug
+сборщик заказов перекресток вакансии,485,transactional,service-slug
+работа сборщиком заказов в перекрестке отзывы,90,info-short,service-slug
+сборщик заказов в перекрестке зарплата,60,transactional,calc
+сколько получает сборщик заказов в перекрестке,45,transactional,calc
+работа курьером в москве,4513,transactional,geo
+подработка курьером в москве,617,transactional,geo
+работа сборщиком заказов в москве,346,transactional,geo
+работа кладовщиком в москве,600,transactional,geo
+сборщик заказов вакансии в москве,707,transactional,geo
+работа курьером спб,2970,transactional,geo
+работа курьером в спб,1501,transactional,geo
+работа курьером спб пеший,162,transactional,geo
+работа курьером в спб отзывы,147,info-short,geo
+доставка спб курьер работа,223,transactional,geo
+работа сборщиком заказов спб,361,transactional,geo
+сборщик заказов вакансии в спб,409,transactional,geo
+вакансии курьера в спб,802,transactional,geo
+работа курьером екатеринбург,1009,transactional,geo
+вакансии курьером в екатеринбурге,266,transactional,geo
+курьер екатеринбург вакансии свежая,183,transactional,geo
+курьер доставка екатеринбург вакансии,60,transactional,geo
+сборщик заказов вакансии екатеринбург,360,transactional,geo
+вакансии курьер новосибирск,414,transactional,geo
+водитель курьер новосибирск вакансии,40,transactional,geo
+пеший курьер новосибирск вакансии,37,transactional,geo
+работа курьером казань,526,transactional,geo
+работа курьером в казани,225,transactional,geo
+доставка работа курьером казань,63,transactional,geo
+отзывы работа курьер казань,42,info-short,geo
+работа курьер казань авто,22,transactional,geo
+работа пешим курьером казань,13,transactional,geo
+работа курьером на электровелосипеде в казани,9,transactional,geo
+работа курьером пенсионеру в казани,5,info-short,voprosy
+самозанятый доставка курьер,605,info-long,blog
+сколько зарабатывает сборщик заказов в самокате,105,transactional,calc
+сколько зарабатывает сборщик заказов купер,101,transactional,calc
+сколько получают сборщики заказов в самокате,111,transactional,calc
+сколько платят сборщикам заказов в пятерочке,159,transactional,calc
+сколько зарабатывает сборщик заказов в яндекс лавке,55,transactional,calc
+подработка курьером в москве с ежедневной оплатой,90,transactional,geo
+подработка курьером в москве свободный график,40,transactional,geo
+работа курьером москва ежедневная оплата,120,transactional,geo
+пешие курьеры москва,70,transactional,role-slug
+подработка курьером новосибирск,35,transactional,geo
+подработка курьером яндекс еда,60,transactional,service-slug
+подработка курьером в яндекс,55,transactional,service-slug
+сборщик заказов в яндекс лавке вакансии,45,transactional,service-slug
+сколько зарабатывает сборщик заказов в перекрестке,40,transactional,calc
+яндекс курьер вакансии,1510,transactional,service-slug
+пятерочка курьер вакансии,942,transactional,service-slug
+как устроиться курьером в 16,1266,transactional,voprosy
+со скольки лет устроиться курьером,1297,transactional,voprosy
+курьер доставка на личном авто,1686,transactional,role-slug
+яндекс сборщик заказов вакансии,614,transactional,service-slug
+лавка сборщик заказов вакансии,520,transactional,service-slug
+лавка работа сборщик заказов,660,transactional,service-slug
+работа кладовщиком яндекс,647,transactional,service-slug
+сборщик заказов вакансии подработка,276,transactional,role-slug
+яндекс еда или самокат курьером,30,comparison,blog
+купер или вкусвилл сборщиком,20,comparison,blog
+где выгоднее работать курьером,40,comparison,blog
+какой сервис доставки платит больше курьерам,35,comparison,blog
+лучший сервис доставки для курьера отзывы,25,comparison,blog
+как стать курьером,150,info-long,blog
+что нужно чтобы работать курьером,80,info-long,blog
+какая одежда нужна курьеру,50,info-short,voprosy
+курьер это тяжело,40,info-long,blog
+курьер плюсы и минусы,60,info-long,blog
+курьер обязанности,70,info-short,voprosy
+нужен ли трудовой договор курьеру,45,info-short,voprosy
+какие документы нужны курьеру,90,info-short,voprosy
+курьер трудовой договор или самозанятость,60,info-long,blog
