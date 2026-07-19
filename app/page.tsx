@@ -40,7 +40,7 @@ export default function HomePage() {
       <section className="relative overflow-hidden bg-graphite text-paper grain">
         <div className="relative mx-auto max-w-6xl px-4 py-14 md:py-20">
           <div className="grid items-center gap-10 md:grid-cols-2">
-            <div>
+            <div className="min-w-0">
               <p className="reveal reveal-1 inline-flex items-center gap-2 rounded-full border border-line-dark px-3 py-1 text-xs font-semibold uppercase tracking-wider opacity-90">
                 <span className="route-dot" aria-hidden /> 7 сервисов доставки · 5 городов
               </p>
@@ -65,15 +65,15 @@ export default function HomePage() {
                   Подобрать сервис за 1 минуту
                 </Link>
               </div>
-              <div className="reveal reveal-4 mt-8 flex items-center gap-3 text-sm opacity-75">
+              <div className="reveal reveal-4 mt-8 flex flex-wrap items-center gap-2 text-sm opacity-75 sm:gap-3">
                 <span className="route-dot" aria-hidden />
-                <span className="route-line w-16" aria-hidden />
+                <span className="route-line w-10 sm:w-16" aria-hidden />
                 <span>заявка</span>
-                <span className="route-line w-8" aria-hidden />
+                <span className="route-line w-6 sm:w-8" aria-hidden />
                 <span>звонок</span>
-                <span className="route-line w-8" aria-hidden />
+                <span className="route-line w-6 sm:w-8" aria-hidden />
                 <span>оформление</span>
-                <span className="route-line w-8" aria-hidden />
+                <span className="route-line w-6 sm:w-8" aria-hidden />
                 <span className="font-semibold text-amber">первая смена</span>
               </div>
             </div>
