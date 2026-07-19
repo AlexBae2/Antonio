@@ -71,7 +71,7 @@ export default async function CityServicePage({ params }: { params: Promise<Para
         ]}
       />
 
-      <div className="mt-4 grid gap-8 lg:grid-cols-[1fr_400px]">
+      <div className="mt-4 grid gap-8 lg:grid-cols-[minmax(0,1fr)_400px]">
         <div>
           <h1 className="font-display text-3xl font-bold leading-tight md:text-4xl">
             {city.name}: работа {kind} {service.brandLoc}

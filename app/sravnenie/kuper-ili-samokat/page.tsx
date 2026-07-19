@@ -32,7 +32,7 @@ export default function KuperIliSamokatPage() {
   return (
     <article className="mx-auto max-w-6xl px-4 py-8">
       <Breadcrumbs items={[{ href: '/sravnenie/kuper-ili-samokat/', label: 'Купер или Самокат' }]} />
-      <div className="mt-4 grid gap-8 lg:grid-cols-[1fr_380px]">
+      <div className="mt-4 grid gap-8 lg:grid-cols-[minmax(0,1fr)_380px]">
         <div>
           <h1 className="font-display text-3xl font-bold leading-tight md:text-4xl">
             Курьером в Купер или Самокат: что выбрать

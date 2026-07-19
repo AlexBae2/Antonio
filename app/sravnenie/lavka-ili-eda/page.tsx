@@ -36,7 +36,7 @@ export default function LavkaIliEdaPage() {
           { href: '/sravnenie/lavka-ili-eda/', label: 'Лавка или Еда' },
         ]}
       />
-      <div className="mt-4 grid gap-8 lg:grid-cols-[1fr_380px]">
+      <div className="mt-4 grid gap-8 lg:grid-cols-[minmax(0,1fr)_380px]">
         <div>
           <h1 className="font-display text-3xl font-bold leading-tight md:text-4xl">
             Курьером в Яндекс Лавку или Яндекс Еду: что выбрать
