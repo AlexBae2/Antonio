@@ -11,7 +11,7 @@ import { absUrl, SITE_NAME, SITE_URL, SITE_YEAR } from '@/lib/site';
 
 export const metadata: Metadata = {
   title: `Работа курьером и сборщиком заказов ${SITE_YEAR}: вакансии сервисов доставки`,
-  description: `Подбор работы в доставке: курьер или сборщик заказов в 7 сервисах. Помогаем оформиться и выйти на первую смену, как правило, на следующий день. Бесплатно для соискателя.`,
+  description: `Подбор работы в доставке и такси: курьер, сборщик заказов, водитель или смены в ${SERVICES.length} сервисах. Помогаем оформиться и выйти на первую смену, как правило, на следующий день. Бесплатно для соискателя.`,
   alternates: { canonical: absUrl('/') },
 };
 
@@ -42,7 +42,7 @@ export default function HomePage() {
           <div className="grid items-center gap-10 md:grid-cols-2">
             <div className="min-w-0">
               <p className="reveal reveal-1 inline-flex items-center gap-2 rounded-full border border-line-dark px-3 py-1 text-xs font-semibold uppercase tracking-wider opacity-90">
-                <span className="route-dot" aria-hidden /> 7 сервисов доставки · 5 городов
+                <span className="route-dot" aria-hidden /> {SERVICES.length} сервисов · {CITIES.length} городов
               </p>
               <h1 className="reveal reveal-2 mt-4 font-display text-3xl font-bold leading-tight md:text-5xl">
                 Работа курьером и сборщиком заказов
