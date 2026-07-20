@@ -83,7 +83,7 @@ export default async function PostPage({ params }: { params: Promise<Params> }) 
         ]}
       />
       <div className="mt-4 grid gap-10 lg:grid-cols-[minmax(0,1fr)_360px]">
-        <div>
+        <div className="min-w-0">
           <div className="flex flex-wrap items-center gap-3 text-xs text-ink-soft">
             <span className="rounded-full bg-amber-soft px-2 py-0.5 font-semibold text-amber-deep">
               {post.category}

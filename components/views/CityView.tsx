@@ -27,7 +27,7 @@ export default function CityView({ city }: { city: City }) {
       <Breadcrumbs items={[{ href: `/${city.slug}/`, label: city.name }]} />
 
       <div className="mt-4 grid gap-8 lg:grid-cols-[minmax(0,1fr)_400px]">
-        <div>
+        <div className="min-w-0">
           <h1 className="font-display text-3xl font-bold leading-tight md:text-4xl">
             Работа курьером {city.namePrepositional}: сервисы, условия, подключение
           </h1>

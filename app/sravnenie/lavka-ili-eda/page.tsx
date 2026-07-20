@@ -37,7 +37,7 @@ export default function LavkaIliEdaPage() {
         ]}
       />
       <div className="mt-4 grid gap-8 lg:grid-cols-[minmax(0,1fr)_380px]">
-        <div>
+        <div className="min-w-0">
           <h1 className="font-display text-3xl font-bold leading-tight md:text-4xl">
             Курьером в Яндекс Лавку или Яндекс Еду: что выбрать
           </h1>

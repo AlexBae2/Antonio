@@ -30,7 +30,7 @@ export default function ServiceView({ service }: { service: Service }) {
       <Breadcrumbs items={[{ href: `/${service.slug}/`, label: service.brandShort }]} />
 
       <div className="mt-4 grid gap-8 lg:grid-cols-[minmax(0,1fr)_400px]">
-        <div>
+        <div className="min-w-0">
           <h1 className="font-display text-3xl font-bold leading-tight md:text-4xl">
             {service.role === 'picker' ? 'Работа сборщиком заказов' : 'Работа курьером'} {service.brandLoc}:
             как устроиться и что по деньгам
