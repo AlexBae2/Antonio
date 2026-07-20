@@ -12,8 +12,8 @@ interface Answers {
 }
 
 function recommend(a: Answers): string[] {
-  if (a.place === 'indoor') return ['sborshchik-marketpleys', 'kurier-express-dostavka'];
-  if (a.transport === 'car') return ['kurier-zakazy-iz-magazinov', 'kurier-dostavka-edy'];
+  if (a.place === 'indoor') return ['sborshchik-marketpleys', 'smennaya-podrabotka'];
+  if (a.transport === 'car') return ['kurier-posylki-i-gruzy', 'voditel-taksi'];
   if (a.time === 'part') {
     return a.priority === 'fast'
       ? ['kurier-produkty-darkstore', 'kurier-dostavka-edy']

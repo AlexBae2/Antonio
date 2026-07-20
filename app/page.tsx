@@ -4,7 +4,7 @@ import JsonLd from '@/components/JsonLd';
 import LeadForm from '@/components/LeadForm';
 import FaqBlock from '@/components/FaqBlock';
 import Disclaimer from '@/components/Disclaimer';
-import { SERVICES } from '@/lib/data/services';
+import { SERVICES, roleTag } from '@/lib/data/services';
 import { ROLES } from '@/lib/data/roles';
 import { CITIES } from '@/lib/data/cities';
 import { absUrl, SITE_NAME, SITE_URL, SITE_YEAR } from '@/lib/site';
@@ -101,7 +101,7 @@ export default function HomePage() {
             >
               <div className="flex items-center justify-between">
                 <h3 className="font-display font-semibold">{s.brandShort}</h3>
-                <span className="text-xs text-ink-soft">{s.role === 'picker' ? 'склад' : 'доставка'}</span>
+                <span className="text-xs text-ink-soft">{roleTag(s)}</span>
               </div>
               <p className="mt-1 text-sm text-ink-soft">{s.category}</p>
               <p className="mt-3 text-sm font-semibold text-amber group-hover:text-amber-deep">

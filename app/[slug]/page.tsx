@@ -1,6 +1,6 @@
 import type { Metadata } from 'next';
 import { notFound } from 'next/navigation';
-import { SERVICES, getService } from '@/lib/data/services';
+import { SERVICES, getService, workNoun } from '@/lib/data/services';
 import { ROLES, getRole } from '@/lib/data/roles';
 import { CITIES, getCity } from '@/lib/data/cities';
 import { absUrl, SITE_YEAR } from '@/lib/site';
@@ -27,10 +27,10 @@ export async function generateMetadata({ params }: { params: Promise<Params> }):
 
   const service = getService(slug);
   if (service) {
-    const kind = service.role === 'picker' ? 'сборщиком заказов' : 'курьером';
+    const kind = workNoun(service);
     return {
       title: `Работа ${kind} ${service.brandLoc}: вакансии, условия, выплаты ${SITE_YEAR}`,
-      description: `Как устроиться ${kind} ${service.brandLoc}: требования от ${service.minAge} лет, оформление, еженедельные выплаты. Заявка за 2 минуты, перезвоним за 30 минут. Бесплатно.`,
+      description: `Как устроиться ${kind} ${service.brandLoc}: требования от ${service.minAge} лет, оформление и подключение. Заявка за 2 минуты, перезвоним за 30 минут. Бесплатно.`,
       alternates: { canonical: absUrl(`/${slug}/`) },
     };
   }

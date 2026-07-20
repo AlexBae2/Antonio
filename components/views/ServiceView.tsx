@@ -6,9 +6,10 @@ import FaqBlock from '@/components/FaqBlock';
 import SimilarJobs from '@/components/SimilarJobs';
 import LeadForm from '@/components/LeadForm';
 import type { Service } from '@/lib/data/services';
-import { SERVICES } from '@/lib/data/services';
+import { SERVICES, workNoun, roleShort, payUnit } from '@/lib/data/services';
 import { CITIES } from '@/lib/data/cities';
 import { TARIFF_FACTS } from '@/lib/data/tariffFacts';
+import { hasCalcModel } from '@/lib/data/calc';
 
 const CONNECTION_LABEL: Record<Service['connection'], string> = {
   direct: 'прямое подключение к сервису',
@@ -21,7 +22,7 @@ export default function ServiceView({ service }: { service: Service }) {
     .slice(0, 4)
     .map((s) => ({
       href: `/${s.slug}/`,
-      title: `${s.role === 'picker' ? 'Сборщик' : 'Курьер'}: ${s.brandShort}`,
+      title: `${roleShort(s)}: ${s.brandShort}`,
       note: s.category,
     }));
 
@@ -32,17 +33,15 @@ export default function ServiceView({ service }: { service: Service }) {
       <div className="mt-4 grid gap-8 lg:grid-cols-[minmax(0,1fr)_400px]">
         <div className="min-w-0">
           <h1 className="font-display text-3xl font-bold leading-tight md:text-4xl">
-            {service.role === 'picker' ? 'Работа сборщиком заказов' : 'Работа курьером'} {service.brandLoc}:
-            как устроиться и что по деньгам
+            Работа {workNoun(service)} {service.brandLoc}: как устроиться и что по деньгам
           </h1>
 
           {/* Прямой ответ первым абзацем: извлекаемость для LLM и быстрых ответов */}
           <p className="mt-4 text-lg leading-relaxed">
-            Работа {service.role === 'picker' ? 'сборщиком заказов' : 'курьером'} {service.brandLoc} —
-            это оплата за {service.role === 'picker' ? 'смены на складе' : 'выполненные заказы'},
-            гибкий график и еженедельные выплаты. Подключение с {service.minAge} лет.{' '}
-            {service.cooperation} Для соискателя всё бесплатно: помогаем оформить документы и выйти на
-            первую смену, как правило, на следующий день после заявки.
+            Работа {workNoun(service)} {service.brandLoc} — это оплата за {payUnit(service)}, гибкий
+            график и регулярные выплаты. Подключение с {service.minAge} лет. {service.cooperation} Для
+            соискателя всё бесплатно: помогаем оформить документы и выйти на первую смену, как правило,
+            на следующий день после заявки.
           </p>
 
           <div className="mt-4">
@@ -164,12 +163,14 @@ export default function ServiceView({ service }: { service: Service }) {
 
         <aside className="lg:sticky lg:top-20 lg:self-start">
           <LeadForm />
-          <p className="mt-3 text-center text-xs text-ink-soft">
-            Или посчитайте доход в{' '}
-            <Link href={`/kalkulyator-dohoda/?service=${service.slug}`} className="underline">
-              калькуляторе
-            </Link>
-          </p>
+          {hasCalcModel(service.slug) && (
+            <p className="mt-3 text-center text-xs text-ink-soft">
+              Или посчитайте доход в{' '}
+              <Link href={`/kalkulyator-dohoda/?service=${service.slug}`} className="underline">
+                калькуляторе
+              </Link>
+            </p>
+          )}
         </aside>
       </div>
     </article>

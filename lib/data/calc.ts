@@ -28,12 +28,23 @@ export const PAY_PER_ORDER: Record<string, [number, number]> = {
   'kurier-express-dostavka': [90, 170],
   'kurier-zdorovoe-pitanie': [110, 200],
   'kurier-produktovye-seti': [100, 190],
+  'kurier-posylki-i-gruzy': [110, 230],
 };
 
-/** Сборщики: оплата за смену, ₽ */
+/** Сменные роли: оплата за смену, ₽ */
 export const PAY_PER_SHIFT: Record<string, [number, number]> = {
   'sborshchik-marketpleys': [2800, 4500],
+  'smennaya-podrabotka': [1500, 4200],
 };
+
+/**
+ * Есть ли у сервиса модель для калькулятора.
+ * Такси намеренно исключено: доход грязный (бензин, комиссия парка),
+ * показывать валовую вилку было бы некорректно.
+ */
+export function hasCalcModel(slug: string): boolean {
+  return Boolean(PAY_PER_ORDER[slug] || PAY_PER_SHIFT[slug]);
+}
 
 /** Множитель плотности заказов по городам (Москва = 1) */
 export const CITY_FACTOR: Record<string, number> = {

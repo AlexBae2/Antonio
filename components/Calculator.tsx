@@ -4,7 +4,10 @@ import { useEffect, useMemo, useState } from 'react';
 import Link from 'next/link';
 import { SERVICES } from '@/lib/data/services';
 import { CITIES } from '@/lib/data/cities';
-import { calcIncome, CALC_DATA_DATE, TRANSPORTS, PAY_PER_SHIFT } from '@/lib/data/calc';
+import { calcIncome, CALC_DATA_DATE, TRANSPORTS, PAY_PER_SHIFT, hasCalcModel } from '@/lib/data/calc';
+
+// Только сервисы с моделью дохода: такси исключено (грязный доход)
+const CALC_SERVICES = SERVICES.filter((s) => hasCalcModel(s.slug));
 
 declare global {
   interface Window {
@@ -28,7 +31,7 @@ export default function Calculator() {
     const params = new URLSearchParams(window.location.search);
     const s = params.get('service');
     const c = params.get('city');
-    if (s && SERVICES.some((x) => x.slug === s)) setService(s);
+    if (s && hasCalcModel(s)) setService(s);
     if (c && CITIES.some((x) => x.slug === c)) setCity(c);
   }, []);
 
@@ -62,7 +65,7 @@ export default function Calculator() {
               onChange={(e) => setService(e.target.value)}
               className="tap mt-1 w-full rounded-xl border-2 border-line bg-card px-3 text-sm outline-none focus:border-amber"
             >
-              {SERVICES.map((s) => (
+              {CALC_SERVICES.map((s) => (
                 <option key={s.slug} value={s.slug}>
                   {s.brandShort}: {s.category}
                 </option>
