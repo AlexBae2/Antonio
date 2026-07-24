@@ -30,6 +30,14 @@ export const metadata: Metadata = {
     'Подбор работы курьером и сборщиком заказов в сервисах доставки: помогаем выбрать сервис, оформить самозанятость и выйти на первую смену. Бесплатно для соискателя.',
   // Стенд на GitHub Pages полностью закрыт от индексации и AI-краулеров
   robots: IS_GITHUB ? { index: false, follow: false } : { index: true, follow: true },
+  openGraph: {
+    type: 'website',
+    locale: 'ru_RU',
+    siteName: SITE_NAME,
+    title: `${SITE_NAME}: ${SITE_TAGLINE}`,
+    description:
+      'Работа курьером, сборщиком, водителем или сменами в сервисах доставки. Помогаем оформиться и выйти на смену. Бесплатно для соискателя.',
+  },
 };
 
 export default function RootLayout({ children }: { children: React.ReactNode }) {

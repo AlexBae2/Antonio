@@ -241,6 +241,7 @@ export default function LeadForm() {
                   value={lead.cityOther}
                   onChange={(e) => setLead((l) => ({ ...l, cityOther: e.target.value }))}
                   placeholder="Название города"
+                  aria-label="Название города"
                   className="tap w-full rounded-xl border-2 border-line px-3 text-sm outline-none focus:border-amber"
                 />
                 <button
@@ -269,11 +270,13 @@ export default function LeadForm() {
                 value={lead.age}
                 onChange={(e) => setLead((l) => ({ ...l, age: e.target.value }))}
                 placeholder="Возраст"
+                aria-label="Ваш возраст"
                 className="tap w-28 rounded-xl border-2 border-line px-3 text-sm outline-none focus:border-amber"
               />
               <select
                 value={lead.citizenship}
                 onChange={(e) => setLead((l) => ({ ...l, citizenship: e.target.value }))}
+                aria-label="Гражданство"
                 className="tap rounded-xl border-2 border-line bg-card px-3 text-sm outline-none focus:border-amber"
               >
                 <option value="РФ">Гражданство РФ</option>
@@ -319,6 +322,7 @@ export default function LeadForm() {
                 value={lead.name}
                 onChange={(e) => setLead((l) => ({ ...l, name: e.target.value }))}
                 placeholder="Имя"
+                aria-label="Ваше имя"
                 className="tap w-full rounded-xl border-2 border-line px-3 text-sm outline-none focus:border-amber"
               />
               <input
@@ -330,6 +334,7 @@ export default function LeadForm() {
                   sendPartial(e.target.value);
                 }}
                 placeholder="+7 900 123-45-67"
+                aria-label="Номер телефона"
                 className="tap w-full rounded-xl border-2 border-line px-3 text-sm outline-none focus:border-amber"
               />
               <label className="flex items-start gap-2 text-xs leading-relaxed text-ink-soft">
