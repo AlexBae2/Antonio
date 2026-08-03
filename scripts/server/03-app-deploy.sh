@@ -27,7 +27,7 @@
 set -euo pipefail
 
 # ─────────────────────────── ПЕРЕМЕННЫЕ ───────────────────────────────────
-REPO="${REPO:-git@github.com:your-org/courier-jobs-site.git}"  # ссылка на репозиторий
+REPO="${REPO:-https://github.com/AlexBae2/Antonio.git}"  # ссылка на репозиторий (HTTPS для публичного, SSH — см. README про deploy-key)
 DOMAIN="${DOMAIN:-smenaru.ru}"                                  # для логов/сообщений
 APP_USER="${APP_USER:-webapp}"                                  # отдельный юзер под приложение (не sudo)
 DEPLOY_USER="${DEPLOY_USER:-deploy}"                             # sudo-пользователь-админ (из 01-harden.sh) — добавим в группу webapp для удобных pm2 logs
@@ -186,9 +186,19 @@ as_app "pm2 save"
 PM2_UNIT="/etc/systemd/system/pm2-${APP_USER}.service"
 if [[ ! -f "$PM2_UNIT" ]]; then
   log "Настраиваем pm2 startup (systemd) для $APP_USER..."
-  env PATH="$PATH:/usr/bin:/usr/local/bin" pm2 startup systemd -u "$APP_USER" --hp "/home/${APP_USER}" \
-    | tail -n1 | bash
-  as_app "pm2 save"
+  # pm2 startup печатает готовую команду для установки systemd-юнита последней
+  # строкой — это официально задокументированный способ её подхватить.
+  # Не даём этому шагу уронить весь деплой, если pm2 когда-нибудь поменяет формат
+  # вывода: тогда просто предупреждаем и просим прогнать команду руками.
+  STARTUP_CMD="$(env PATH="$PATH:/usr/bin:/usr/local/bin" pm2 startup systemd -u "$APP_USER" --hp "/home/${APP_USER}" | tail -n1)"
+  if [[ "$STARTUP_CMD" == *systemctl* ]]; then
+    bash -c "$STARTUP_CMD"
+    as_app "pm2 save"
+  else
+    warn "Не удалось автоматически распарсить вывод 'pm2 startup' — настройте автозапуск вручную:"
+    warn "  sudo env PATH=\$PATH:/usr/bin pm2 startup systemd -u ${APP_USER} --hp /home/${APP_USER}"
+    warn "  (выполнить команду, которую эта команда напечатает)"
+  fi
 else
   log "pm2-${APP_USER}.service уже настроен — пропускаем."
 fi

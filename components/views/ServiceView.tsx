@@ -38,8 +38,8 @@ export default function ServiceView({ service }: { service: Service }) {
 
           {/* Прямой ответ первым абзацем: извлекаемость для LLM и быстрых ответов */}
           <p className="mt-4 text-lg leading-relaxed">
-            Работа {workNoun(service)} {service.brandLoc} — это оплата за {payUnit(service)}, гибкий
-            график и регулярные выплаты. Подключение с {service.minAge} лет. {service.cooperation} Для
+            Работа {workNoun(service)} {service.brandLoc}: оплата за {payUnit(service)}, гибкий
+            график и регулярные выплаты, берут с {service.minAge} лет. {service.cooperation} Для
             соискателя всё бесплатно: помогаем оформить документы и выйти на первую смену, как правило,
             на следующий день после заявки.
           </p>

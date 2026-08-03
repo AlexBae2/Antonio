@@ -266,6 +266,11 @@ export const TARIFF_FACTS: Record<string, ServiceTariff> = {
         source: 'couriers.magnit.ru, rabota.magnit.ru/moskva/courier',
         verified: true,
       },
+      {
+        text: 'Отдельно от курьерской работы сеть набирает сборщиков в дарксторы уже в штат по трудовому договору, с белой зарплатой два раза в месяц и заявленным доходом до 140 000 ₽. Если нужен именно трудовой договор, а не самозанятость, скажите об этом на звонке.',
+        source: 'rabota.magnit.ru/moskva/darkstore/picker',
+        verified: true,
+      },
     ],
     note: 'Тарифы за заказ различаются по городам: точные цифры по вашему городу подтверждаем при подключении.',
   },
