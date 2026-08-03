@@ -1,11 +1,11 @@
 export const IS_GITHUB = process.env.NEXT_PUBLIC_DEPLOY_TARGET === 'github';
 export const BASE_PATH = process.env.NEXT_PUBLIC_BASE_PATH || '';
 
-// Прод-домен ещё не куплен. До покупки canonical/OG собираются от плейсхолдера,
-// стенд на GitHub Pages полностью закрыт noindex, так что наружу это не утекает.
-export const SITE_URL = process.env.NEXT_PUBLIC_SITE_URL || 'https://na-smenu.example';
+// Прод-домен зарегистрирован 30.07.2026, NS делегированы на Timeweb.
+// Стенд на GitHub Pages закрыт noindex, но canonical/OG собираем уже от прода.
+export const SITE_URL = process.env.NEXT_PUBLIC_SITE_URL || 'https://smenaru.ru';
 
-export const SITE_NAME = 'НаСмену';
+export const SITE_NAME = 'Смена.ру';
 export const SITE_TAGLINE = 'Работа курьером и сборщиком заказов в сервисах доставки';
 export const SITE_YEAR = 2026;
 

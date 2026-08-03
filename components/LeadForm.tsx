@@ -7,6 +7,9 @@ import { SERVICES } from '@/lib/data/services';
 
 const IS_DEMO = process.env.NEXT_PUBLIC_DEPLOY_TARGET === 'github';
 
+/** Самый низкий порог среди сервисов: ниже него подключить некуда */
+const MIN_AGE_OVERALL = Math.min(...SERVICES.map((s) => s.minAge));
+
 type Step = 'city' | 'age' | 'service' | 'phone' | 'done' | 'underage';
 
 interface LeadState {
@@ -74,6 +77,13 @@ export default function LeadForm() {
   const stepIndex = steps.indexOf(step);
   const progress = step === 'done' ? 100 : Math.max(0, (stepIndex / steps.length) * 100);
 
+  // Сервисы, доступные по возрасту кандидата: у части порог 16 лет, у такси 21
+  const availableServices = useMemo(() => {
+    const age = Number(lead.age);
+    if (!age) return SERVICES;
+    return SERVICES.filter((s) => age >= s.minAge);
+  }, [lead.age]);
+
   const cityName = useMemo(() => {
     if (lead.city === 'other') return lead.cityOther;
     return CITIES.find((c) => c.slug === lead.city)?.name || '';
@@ -96,7 +106,9 @@ export default function LeadForm() {
       setError('Укажите возраст числом');
       return;
     }
-    if (age < 18) {
+    // Часть сервисов подключает с 16 лет через партнёрскую организацию,
+    // поэтому 16-17 лет не отсекаем: показываем только доступные им сервисы.
+    if (age < MIN_AGE_OVERALL) {
       goal('form_underage');
       setStep('underage');
       return;
@@ -293,9 +305,13 @@ export default function LeadForm() {
         {step === 'service' && (
           <fieldset>
             <legend className="font-semibold">Шаг 3. Где хотите работать?</legend>
-            <p className="mt-1 text-sm text-ink-soft">Если не уверены, выберите первый вариант: подберём вместе.</p>
+            <p className="mt-1 text-sm text-ink-soft">
+              {availableServices.length < SERVICES.length
+                ? `В ${lead.age} лет подключают эти сервисы: остальные берут с 18 лет. Для оформления понадобится согласие родителей.`
+                : 'Если не уверены, выберите первый вариант: подберём вместе.'}
+            </p>
             <div className="mt-3 grid gap-2 sm:grid-cols-2">
-              {SERVICES.map((s) => (
+              {availableServices.map((s) => (
                 <button
                   key={s.slug}
                   type="button"
@@ -385,7 +401,7 @@ export default function LeadForm() {
           <div className="py-6 text-center">
             <h3 className="font-display text-xl font-semibold">Пока рано, но мы на связи</h3>
             <p className="mx-auto mt-2 max-w-sm text-sm text-ink-soft">
-              Сервисы доставки подключают курьеров с 18 лет: это их требование, обойти его нельзя.
+              Самый ранний порог у сервисов: {MIN_AGE_OVERALL} лет, обойти его нельзя.
               Возвращайтесь после дня рождения, а пока почитайте,{' '}
               <Link href="/blog/so-skolki-let-mozhno-rabotat-kurerom/" className="underline">
                 со скольки лет и куда берут
