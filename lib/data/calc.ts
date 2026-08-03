@@ -29,6 +29,8 @@ export const PAY_PER_ORDER: Record<string, [number, number]> = {
   'kurier-zdorovoe-pitanie': [110, 200],
   'kurier-produktovye-seti': [100, 190],
   'kurier-posylki-i-gruzy': [110, 230],
+  // Магнит: взятие + вручение + километраж по официальной тарифной сетке
+  'kurier-dostavka-supermarket': [95, 200],
 };
 
 /** Сменные роли: оплата за смену, ₽ */

@@ -18,7 +18,7 @@ export const ROLES: Role[] = [
     description:
       'Доставка заказов пешком в своём районе. Не нужен транспорт и вложения: только смартфон и удобная обувь. Самый простой способ начать в доставке.',
     suitedFor: ['студентам', 'тем, кто хочет начать без вложений', 'тем, кто любит ходить'],
-    services: ['kurier-dostavka-edy', 'kurier-produkty-darkstore', 'kurier-express-dostavka', 'kurier-zakazy-iz-magazinov'],
+    services: ['kurier-dostavka-edy', 'kurier-produkty-darkstore', 'kurier-express-dostavka', 'kurier-zakazy-iz-magazinov', 'kurier-dostavka-supermarket'],
     tldr: [
       'Старт без вложений: нужен только смартфон',
       '10-20 тысяч шагов за смену: работа для активных',
@@ -32,7 +32,7 @@ export const ROLES: Role[] = [
       },
       {
         q: 'Что нужно, чтобы начать работать пешим курьером?',
-        a: 'Смартфон с интернетом, возраст от 18 лет и оформленная самозанятость: с ней помогаем на подключении. Обувь и одежда по погоде: экипировку в ряде сервисов выдают.',
+        a: 'Смартфон с интернетом и возраст от 16 лет: часть сервисов подключает с 16, но тогда нужно согласие родителей, а с 18 лет доступна самозанятость и все сервисы. С оформлением помогаем. Обувь и одежда по погоде, экипировку в ряде сервисов выдают.',
       },
     ],
   },
@@ -43,7 +43,7 @@ export const ROLES: Role[] = [
     description:
       'Доставка на велосипеде или электровелосипеде: больше заказов в час, чем пешком, и шире радиус. В части сервисов транспорт выдают.',
     suitedFor: ['тем, у кого есть велосипед', 'тем, кто хочет больше заказов в час', 'активным'],
-    services: ['kurier-dostavka-edy', 'kurier-produkty-darkstore', 'kurier-express-dostavka'],
+    services: ['kurier-dostavka-edy', 'kurier-produkty-darkstore', 'kurier-express-dostavka', 'kurier-dostavka-supermarket'],
     tldr: [
       'Больше заказов в час, чем у пешего курьера',
       'В ряде дарксторов выдают электровелосипед',
@@ -64,7 +64,7 @@ export const ROLES: Role[] = [
     description:
       'Доставка на своём автомобиле: крупные заказы, большой радиус, работа в любую погоду. Нужны права категории B и авто.',
     suitedFor: ['владельцам авто', 'тем, кто хочет крупные заказы', 'тем, кто не хочет зависеть от погоды'],
-    services: ['kurier-dostavka-edy', 'kurier-zakazy-iz-magazinov', 'kurier-zdorovoe-pitanie'],
+    services: ['kurier-dostavka-edy', 'kurier-zakazy-iz-magazinov', 'kurier-zdorovoe-pitanie', 'kurier-dostavka-supermarket'],
     tldr: [
       'Крупные заказы: продуктовые корзины, дальние адреса',
       'Работа в любую погоду в комфорте',

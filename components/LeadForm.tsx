@@ -84,6 +84,21 @@ export default function LeadForm() {
     return SERVICES.filter((s) => age >= s.minAge);
   }, [lead.age]);
 
+  /**
+   * Подсказка на шаге выбора сервиса. Порогов два (16 и 18 лет, у такси 21),
+   * поэтому текст зависит от того, что именно скрыто для этого возраста.
+   */
+  const serviceStepHint = useMemo(() => {
+    const age = Number(lead.age);
+    const hidden = SERVICES.filter((s) => age && age < s.minAge);
+    if (!hidden.length) return 'Если не уверены, выберите первый вариант: подберём вместе.';
+    const nextThreshold = Math.min(...hidden.map((s) => s.minAge));
+    if (age < 18) {
+      return `В ${age} лет подключают эти сервисы. Остальные берут с ${nextThreshold} лет, а для оформления сейчас понадобится согласие родителей.`;
+    }
+    return `Показываем то, что доступно в ${age} лет: остальные сервисы подключают с ${nextThreshold} лет.`;
+  }, [lead.age]);
+
   const cityName = useMemo(() => {
     if (lead.city === 'other') return lead.cityOther;
     return CITIES.find((c) => c.slug === lead.city)?.name || '';
@@ -305,11 +320,7 @@ export default function LeadForm() {
         {step === 'service' && (
           <fieldset>
             <legend className="font-semibold">Шаг 3. Где хотите работать?</legend>
-            <p className="mt-1 text-sm text-ink-soft">
-              {availableServices.length < SERVICES.length
-                ? `В ${lead.age} лет подключают эти сервисы: остальные берут с 18 лет. Для оформления понадобится согласие родителей.`
-                : 'Если не уверены, выберите первый вариант: подберём вместе.'}
-            </p>
+            <p className="mt-1 text-sm text-ink-soft">{serviceStepHint}</p>
             <div className="mt-3 grid gap-2 sm:grid-cols-2">
               {availableServices.map((s) => (
                 <button

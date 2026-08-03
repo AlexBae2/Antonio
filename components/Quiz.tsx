@@ -19,7 +19,7 @@ function recommend(a: Answers): string[] {
       ? ['kurier-produkty-darkstore', 'kurier-dostavka-edy']
       : ['kurier-dostavka-edy', 'kurier-produkty-darkstore'];
   }
-  if (a.priority === 'stable') return ['kurier-express-dostavka', 'kurier-zdorovoe-pitanie'];
+  if (a.priority === 'stable') return ['kurier-express-dostavka', 'kurier-dostavka-supermarket'];
   return ['kurier-dostavka-edy', 'kurier-zakazy-iz-magazinov'];
 }
 
