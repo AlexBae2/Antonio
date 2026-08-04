@@ -5,13 +5,17 @@ import path from 'node:path';
 /**
  * Лиды: SQLite через встроенный node:sqlite (Node 22+), без внешних зависимостей.
  * Файл живёт в data/ (в .gitignore). На проде это РФ-хостинг: требование 152-ФЗ.
+ *
+ * Путь задаётся через LEADS_DATA_DIR. Это обязательно на проде: standalone-сборка
+ * Next.js стартует из .next/standalone, и относительный путь увёл бы базу внутрь
+ * .next, который стирается при каждой пересборке вместе со всеми заявками.
  */
 
 let db: DatabaseSync | null = null;
 
 export function getDb(): DatabaseSync {
   if (db) return db;
-  const dir = path.join(process.cwd(), 'data');
+  const dir = process.env.LEADS_DATA_DIR || path.join(process.cwd(), 'data');
   mkdirSync(dir, { recursive: true });
   db = new DatabaseSync(path.join(dir, 'leads.db'));
   db.exec(`
