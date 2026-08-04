@@ -7,7 +7,7 @@ import Disclaimer from '@/components/Disclaimer';
 import { SERVICES, roleTag } from '@/lib/data/services';
 import { ROLES } from '@/lib/data/roles';
 import { CITIES } from '@/lib/data/cities';
-import { absUrl, SITE_NAME, SITE_URL, SITE_YEAR } from '@/lib/site';
+import { absUrl, CONTACTS, LEGAL, SITE_NAME, SITE_URL, SITE_YEAR } from '@/lib/site';
 
 export const metadata: Metadata = {
   title: `Работа курьером и сборщиком заказов ${SITE_YEAR}: вакансии сервисов доставки`,
@@ -169,7 +169,18 @@ export default function HomePage() {
           '@context': 'https://schema.org',
           '@type': 'Organization',
           name: SITE_NAME,
+          legalName: LEGAL.orgName,
           url: SITE_URL,
+          taxID: LEGAL.inn,
+          email: LEGAL.email,
+          ...(CONTACTS.phoneHref ? { telephone: CONTACTS.phoneHref } : {}),
+          address: {
+            '@type': 'PostalAddress',
+            addressCountry: 'RU',
+            addressLocality: 'Кемерово',
+            postalCode: '650903',
+            streetAddress: 'ул. Линейная 1-я, д. 14',
+          },
           description:
             'Независимый кадровый партнёр по подбору курьеров и сборщиков заказов для сервисов доставки',
         }}

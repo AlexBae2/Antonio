@@ -1,6 +1,6 @@
 import type { Metadata } from 'next';
 import Breadcrumbs from '@/components/Breadcrumbs';
-import { absUrl, SITE_NAME } from '@/lib/site';
+import { absUrl, LEGAL, SITE_NAME } from '@/lib/site';
 
 export const metadata: Metadata = {
   title: 'Политика обработки персональных данных',
@@ -20,8 +20,9 @@ export default function PolicyPage() {
         <section>
           <h2 className="font-display text-xl font-semibold">1. Кто обрабатывает данные</h2>
           <p className="mt-2">
-            Оператор: юридическое лицо, реквизиты которого указаны на странице «Реквизиты» этого
-            сайта. Настоящая политика действует для всех форм сбора данных на сайте.
+            Оператор персональных данных: {LEGAL.orgName}, ИНН {LEGAL.inn}, ОГРНИП {LEGAL.ogrnip},
+            адрес: {LEGAL.address}. Контакт для обращений: {LEGAL.email}. Настоящая политика
+            действует для всех форм сбора данных на сайте.
           </p>
         </section>
         <section>
