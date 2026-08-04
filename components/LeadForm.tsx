@@ -222,15 +222,23 @@ export default function LeadForm() {
         <div className="h-full rounded-full bg-amber transition-all duration-300" style={{ width: `${progress}%` }} />
       </div>
 
-      {/* honeypot */}
+      {/*
+        Honeypot. Имя поля намеренно бессмысленное: браузеры автозаполняют
+        скрытые поля с понятными именами (company, address) даже при
+        autocomplete="off", и живые заявки ложно улетали в риск-скор.
+        data-атрибуты отключают менеджеры паролей.
+      */}
       <input
         type="text"
-        name="company"
+        name="hp_xr"
         value={company}
         onChange={(e) => setCompany(e.target.value)}
         className="absolute -left-[9999px] h-0 w-0 opacity-0"
         tabIndex={-1}
         autoComplete="off"
+        data-lpignore="true"
+        data-1p-ignore="true"
+        data-form-type="other"
         aria-hidden
       />
 

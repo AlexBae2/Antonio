@@ -21,7 +21,8 @@ interface LeadBody {
   service?: string;
   phone?: string;
   name?: string;
-  company?: string; // honeypot
+  /** honeypot: приходит с клиента под нейтральным именем поля */
+  company?: string;
   startedAt?: number;
   page?: string;
   yclid?: string;
@@ -55,7 +56,9 @@ export async function POST(req: NextRequest) {
 
   if (body.company) {
     flags.push('honeypot');
-    risk += 60;
+    // 50, а не 60: одного honeypot мало, чтобы скрыть заявку от колл-центра.
+    // Порог уведомления перешагивается только вместе со вторым сигналом.
+    risk += 50;
   }
   const fillMs = body.startedAt ? Date.now() - Number(body.startedAt) : null;
   if (fillMs !== null && fillMs >= 0 && fillMs < 3000) {
