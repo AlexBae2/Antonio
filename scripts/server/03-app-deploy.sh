@@ -41,7 +41,10 @@ PM2_MAX_MEMORY="${PM2_MAX_MEMORY:-400M}"
 # ERR_UNKNOWN_BUILTIN_MODULE. На локальной машине разработчика это может не
 # бросаться в глаза, если там стоит Node 24+ (там флаг уже не нужен) —
 # именно поэтому ловим это здесь явно, а не полагаемся, что "и так заработает".
-APP_NODE_OPTIONS="${APP_NODE_OPTIONS:---experimental-sqlite}"
+# --dns-result-order=ipv4first: на VPS Timeweb исходящий IPv4 отвечал не всегда,
+# и fetch к api.telegram.org зависал до таймаута в режиме verbatim (2 падения из 3
+# замеров). С этим флагом уведомления о заявках уходят стабильно.
+APP_NODE_OPTIONS="${APP_NODE_OPTIONS:---experimental-sqlite --dns-result-order=ipv4first}"
 
 # бэкапы
 BACKUP_DIR="${BACKUP_DIR:-/var/backups/leads-db}"

@@ -15,6 +15,13 @@ export function maskPhone(phone: string): string {
   return `+${digits[0]} ${digits.slice(1, 4)} ***-**-${digits.slice(9, 11)}`;
 }
 
+/** Читаемый номер для колл-центра: по нему сразу звонят из телеграма */
+export function formatPhone(phone: string): string {
+  const d = phone.replace(/\D/g, '');
+  if (d.length !== 11) return phone;
+  return `+${d[0]} ${d.slice(1, 4)} ${d.slice(4, 7)}-${d.slice(7, 9)}-${d.slice(9)}`;
+}
+
 const SERVICE_NAMES: Record<string, string> = {
   'kurier-dostavka-edy': 'Яндекс Еда',
   'kurier-produkty-darkstore': 'Яндекс Лавка',
@@ -81,8 +88,9 @@ export async function notifyLead(params: {
       `Город: ${params.city || 'не указан'}`,
       `Сервис: ${service}`,
       `Имя: ${params.name || 'не указано'}`,
-      `Телефон: ${maskPhone(params.phone)}`,
-      'Полный номер и статусы: /admin на сайте',
+      // Полный номер, а не маска: телеграм у колл-центра единственный канал,
+      // с маской по заявке нельзя перезвонить
+      `Телефон: ${formatPhone(params.phone)}`,
     ].join('\n') + risk;
 
   try {
