@@ -222,26 +222,6 @@ export default function LeadForm() {
         <div className="h-full rounded-full bg-amber transition-all duration-300" style={{ width: `${progress}%` }} />
       </div>
 
-      {/*
-        Honeypot. Имя поля намеренно бессмысленное: браузеры автозаполняют
-        скрытые поля с понятными именами (company, address) даже при
-        autocomplete="off", и живые заявки ложно улетали в риск-скор.
-        data-атрибуты отключают менеджеры паролей.
-      */}
-      <input
-        type="text"
-        name="hp_xr"
-        value={company}
-        onChange={(e) => setCompany(e.target.value)}
-        className="absolute -left-[9999px] h-0 w-0 opacity-0"
-        tabIndex={-1}
-        autoComplete="off"
-        data-lpignore="true"
-        data-1p-ignore="true"
-        data-form-type="other"
-        aria-hidden
-      />
-
       <div className="mt-5 min-h-[220px]">
         {step === 'city' && (
           <fieldset>
@@ -358,6 +338,8 @@ export default function LeadForm() {
                 onChange={(e) => setLead((l) => ({ ...l, name: e.target.value }))}
                 placeholder="Имя"
                 aria-label="Ваше имя"
+                name="applicant_name"
+                autoComplete="given-name"
                 className="tap w-full rounded-xl border-2 border-line px-3 text-sm outline-none focus:border-amber"
               />
               <input
@@ -370,6 +352,8 @@ export default function LeadForm() {
                 }}
                 placeholder="+7 900 123-45-67"
                 aria-label="Номер телефона"
+                name="applicant_phone"
+                autoComplete="tel"
                 className="tap w-full rounded-xl border-2 border-line px-3 text-sm outline-none focus:border-amber"
               />
               <label className="flex items-start gap-2 text-xs leading-relaxed text-ink-soft">
@@ -432,6 +416,26 @@ export default function LeadForm() {
       </div>
 
       {error && <p className="mt-3 rounded-lg bg-amber-soft px-3 py-2 text-sm text-amber-deep">{error}</p>}
+
+      {/*
+        Honeypot держим последним полем формы. Когда он стоял первым, в него
+        попадало и автозаполнение браузера, и имя из живой заявки: человек терял
+        имя, а заявка получала риск-скор ни за что. Имя поля бессмысленное,
+        data-атрибуты отключают менеджеры паролей.
+      */}
+      <input
+        type="text"
+        name="hp_xr"
+        value={company}
+        onChange={(e) => setCompany(e.target.value)}
+        className="absolute -left-[9999px] h-0 w-0 opacity-0"
+        tabIndex={-1}
+        autoComplete="off"
+        data-lpignore="true"
+        data-1p-ignore="true"
+        data-form-type="other"
+        aria-hidden
+      />
     </div>
   );
 }
