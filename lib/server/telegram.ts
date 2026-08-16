@@ -52,9 +52,9 @@ async function post(url: string, body: string, dispatcher?: unknown, timeoutMs =
     headers: { 'Content-Type': 'application/json' },
     body,
     signal: AbortSignal.timeout(timeoutMs),
-    // @ts-expect-error dispatcher поддерживается undici-реализацией fetch в Node
-    ...(dispatcher ? { dispatcher } : {}),
-  });
+    // dispatcher понимает undici-реализация fetch в Node, в типах DOM его нет
+    ...(dispatcher ? ({ dispatcher } as Record<string, unknown>) : {}),
+  } as RequestInit);
 }
 
 /**

@@ -1,24 +1,17 @@
 import type { Metadata } from 'next';
-import { Unbounded, Golos_Text } from 'next/font/google';
 import './globals.css';
-import { IS_GITHUB, SITE_NAME, SITE_TAGLINE, SITE_URL } from '@/lib/site';
+import { BASE_PATH, IS_GITHUB, SITE_NAME, SITE_TAGLINE, SITE_URL } from '@/lib/site';
 import Header from '@/components/Header';
 import Footer from '@/components/Footer';
 import StickyBar from '@/components/StickyBar';
 
-const unbounded = Unbounded({
-  subsets: ['cyrillic', 'latin'],
-  weight: ['500', '600', '700'],
-  variable: '--font-unbounded',
-  display: 'swap',
-});
-
-const golos = Golos_Text({
-  subsets: ['cyrillic', 'latin'],
-  weight: ['400', '500', '600'],
-  variable: '--font-golos',
-  display: 'swap',
-});
+/*
+  Шрифты лежат в public/fonts и подключаются своим CSS, а не через next/font/google.
+  Причина: next/font тянет файлы с fonts.gstatic.com во время сборки, и когда домен
+  недоступен, падает весь деплой (поймали 16.08.2026 - легли и локальная сборка,
+  и CI). Свои файлы убирают внешнюю зависимость и лишний round-trip у посетителя.
+  Пути внутри fonts.css относительные, поэтому basePath стенда учитывается сам.
+*/
 
 export const metadata: Metadata = {
   metadataBase: new URL(SITE_URL),
@@ -42,7 +35,11 @@ export const metadata: Metadata = {
 
 export default function RootLayout({ children }: { children: React.ReactNode }) {
   return (
-    <html lang="ru" className={`${unbounded.variable} ${golos.variable}`}>
+    <html lang="ru">
+      <head>
+        <link rel="preconnect" href={SITE_URL} />
+        <link rel="stylesheet" href={`${BASE_PATH}/fonts/fonts.css`} />
+      </head>
       <body className="flex min-h-screen flex-col pb-16 md:pb-0">
         <Header />
         <main className="flex-1">{children}</main>

@@ -15,8 +15,9 @@
   --color-line: #e7e2da;
   --color-line-dark: #37342f;
 
-  --font-display: var(--font-unbounded), system-ui, sans-serif;
-  --font-sans: var(--font-golos), system-ui, sans-serif;
+  /* Семейства объявлены в public/fonts/fonts.css: свои файлы, не Google CDN */
+  --font-display: 'Unbounded', system-ui, sans-serif;
+  --font-sans: 'Golos Text', system-ui, sans-serif;
 
   --radius-card: 1rem;
 
