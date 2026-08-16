@@ -36,33 +36,57 @@ const SERVICE_NAMES: Record<string, string> = {
   'kurier-dostavka-supermarket': 'Магнит',
 };
 
-async function send(url: string, body: string): Promise<Response> {
-  const direct = () =>
-    fetch(url, {
-      method: 'POST',
-      headers: { 'Content-Type': 'application/json' },
-      body,
-      signal: AbortSignal.timeout(8000),
-    });
+/** Прокси-агент создаём один раз: пересоздание на каждый лид течёт сокетами */
+let proxyDispatcher: unknown = null;
+
+async function getProxyDispatcher(proxyUrl: string): Promise<unknown> {
+  if (proxyDispatcher) return proxyDispatcher;
+  const { ProxyAgent } = await import('undici');
+  proxyDispatcher = new ProxyAgent(proxyUrl);
+  return proxyDispatcher;
+}
+
+async function post(url: string, body: string, dispatcher?: unknown, timeoutMs = 8000) {
+  return fetch(url, {
+    method: 'POST',
+    headers: { 'Content-Type': 'application/json' },
+    body,
+    signal: AbortSignal.timeout(timeoutMs),
+    // @ts-expect-error dispatcher поддерживается undici-реализацией fetch в Node
+    ...(dispatcher ? { dispatcher } : {}),
+  });
+}
+
+/**
+ * Отправка с деградацией: прямой запрос, при сбое повтор через прокси.
+ * TELEGRAM_FORCE_PROXY=1 отправляет сразу через прокси, минуя прямую попытку:
+ * пригодится, если хостер закроет доступ к Telegram насовсем.
+ */
+export async function send(url: string, body: string): Promise<{ res: Response; via: string }> {
+  const proxy = process.env.TELEGRAM_PROXY_URL;
+  const force = process.env.TELEGRAM_FORCE_PROXY === '1';
+
+  if (proxy && force) {
+    const res = await post(url, body, await getProxyDispatcher(proxy), 12000);
+    if (!res.ok) throw new Error(`Telegram через прокси ответил ${res.status}`);
+    return { res, via: 'proxy(forced)' };
+  }
 
   try {
-    const res = await direct();
-    if (res.ok) return res;
+    const res = await post(url, body);
+    if (res.ok) return { res, via: 'direct' };
+    // 4xx это наша ошибка (неверный chat_id или токен), прокси её не починит
+    if (res.status >= 400 && res.status < 500) {
+      throw new Error(`Telegram отклонил запрос: ${res.status} ${await res.text()}`);
+    }
     throw new Error(`Telegram ответил ${res.status}`);
   } catch (err) {
-    const proxy = process.env.TELEGRAM_PROXY_URL;
     if (!proxy) throw err;
+    if (err instanceof Error && err.message.startsWith('Telegram отклонил')) throw err;
 
-    // ProxyAgent грузим динамически: без прокси зависимость не нужна
-    const { ProxyAgent } = await import('undici');
-    return fetch(url, {
-      method: 'POST',
-      headers: { 'Content-Type': 'application/json' },
-      body,
-      signal: AbortSignal.timeout(12000),
-      // @ts-expect-error dispatcher поддерживается undici-реализацией fetch в Node
-      dispatcher: new ProxyAgent(proxy),
-    });
+    const res = await post(url, body, await getProxyDispatcher(proxy), 12000);
+    if (!res.ok) throw new Error(`Telegram через прокси ответил ${res.status}`);
+    return { res, via: 'proxy(fallback)' };
   }
 }
 
@@ -94,10 +118,14 @@ export async function notifyLead(params: {
     ].join('\n') + risk;
 
   try {
-    await send(
+    const { via } = await send(
       `https://api.telegram.org/bot${token}/sendMessage`,
       JSON.stringify({ chat_id: chatId, text }),
     );
+    if (via !== 'direct') {
+      // видно в journalctl: значит прямой путь до телеграма отвалился
+      console.warn(`[telegram] уведомление о лиде ${params.id} ушло через ${via}`);
+    }
   } catch (err) {
     // Заявка уже в базе, поэтому уведомление не роняет запрос.
     // Но молчать нельзя: без лога такие сбои не диагностируются.
