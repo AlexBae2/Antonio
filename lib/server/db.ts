@@ -52,6 +52,18 @@ export function getDb(): DatabaseSync {
       client_id TEXT,
       yclid TEXT
     );
+    CREATE TABLE IF NOT EXISTS telegram_messages (
+      id INTEGER PRIMARY KEY AUTOINCREMENT,
+      created_at TEXT NOT NULL DEFAULT (datetime('now')),
+      update_id INTEGER,
+      chat_id TEXT NOT NULL,
+      from_id TEXT,
+      username TEXT,
+      first_name TEXT,
+      last_name TEXT,
+      text TEXT
+    );
+    CREATE INDEX IF NOT EXISTS idx_telegram_messages_from ON telegram_messages(from_id);
   `);
   return db;
 }
@@ -69,4 +81,15 @@ export interface LeadRow {
   page: string | null;
   risk_score: number;
   risk_flags: string | null;
+}
+
+export interface TelegramMessageRow {
+  id: number;
+  created_at: string;
+  chat_id: string;
+  from_id: string | null;
+  username: string | null;
+  first_name: string | null;
+  last_name: string | null;
+  text: string | null;
 }

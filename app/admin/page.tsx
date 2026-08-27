@@ -1,5 +1,5 @@
 import { notFound } from 'next/navigation';
-import { getDb, type LeadRow } from '@/lib/server/db';
+import { getDb, type LeadRow, type TelegramMessageRow } from '@/lib/server/db';
 
 export const dynamic = 'force-dynamic';
 export const metadata = { robots: { index: false, follow: false }, title: 'Лиды' };
@@ -39,6 +39,10 @@ export default async function AdminPage({
   const leads = getDb()
     .prepare(`SELECT * FROM leads ORDER BY id DESC LIMIT 200`)
     .all() as unknown as LeadRow[];
+
+  const telegramMessages = getDb()
+    .prepare(`SELECT * FROM telegram_messages ORDER BY id DESC LIMIT 100`)
+    .all() as unknown as TelegramMessageRow[];
 
   return (
     <div className="mx-auto max-w-6xl px-4 py-8">
@@ -88,6 +92,39 @@ export default async function AdminPage({
                 </td>
               </tr>
             ))}
+          </tbody>
+        </table>
+      </div>
+
+      <h2 className="font-display mt-10 text-xl font-bold">Входящие сообщения боту (последние 100)</h2>
+      <div className="mt-4 overflow-x-auto">
+        <table className="w-full min-w-[700px] border-collapse text-sm">
+          <thead>
+            <tr className="border-b-2 border-line text-left">
+              <th className="py-2 pr-2">Когда</th>
+              <th className="py-2 pr-2">Кто</th>
+              <th className="py-2 pr-2">username</th>
+              <th className="py-2">Текст</th>
+            </tr>
+          </thead>
+          <tbody>
+            {telegramMessages.map((m) => (
+              <tr key={m.id} className="border-b border-line">
+                <td className="py-2 pr-2 text-xs">{m.created_at}</td>
+                <td className="py-2 pr-2">
+                  {[m.first_name, m.last_name].filter(Boolean).join(' ') || m.from_id}
+                </td>
+                <td className="py-2 pr-2 text-xs">{m.username ? `@${m.username}` : ''}</td>
+                <td className="py-2">{m.text}</td>
+              </tr>
+            ))}
+            {telegramMessages.length === 0 && (
+              <tr>
+                <td colSpan={4} className="py-4 text-ink-soft">
+                  Пока пусто
+                </td>
+              </tr>
+            )}
           </tbody>
         </table>
       </div>
