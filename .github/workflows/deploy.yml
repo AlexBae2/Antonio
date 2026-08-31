@@ -1,11 +1,9 @@
 name: Deploy to GitHub Pages
 
+# Автоматических триггеров нет: ни деплоя на push в main, ни ежедневного
+# ребилда по cron. Публикация на Pages идёт только по ручному запуску.
+# Следствие: статьи с будущим publishAt сами не выходят - нужен ручной прогон.
 on:
-  push:
-    branches: [main]
-  # автопостинг: ежедневный ребилд публикует статьи с наступившим publishAt
-  schedule:
-    - cron: '30 3 * * *'
   workflow_dispatch:
 
 permissions:
