@@ -276,7 +276,8 @@ export default function LeadForm() {
           <fieldset>
             <legend className="font-semibold">Шаг 2. Возраст и гражданство</legend>
             <p className="mt-1 text-sm text-ink-soft">
-              У сервисов доставки требование: от 18 лет. Спрашиваем сразу, чтобы не тратить ваше время.
+              Порог у сервисов разный: часть подключает с {MIN_AGE_OVERALL} лет, у большинства планка 18 лет,
+              в такси 21. Спрашиваем сразу, чтобы показать только доступные вам варианты.
             </p>
             <div className="mt-3 flex flex-wrap gap-2">
               <input

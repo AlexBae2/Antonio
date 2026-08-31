@@ -48,7 +48,7 @@ export async function generateMetadata({ params }: { params: Promise<Params> }):
   if (city) {
     return {
       title: `${city.name}: работа курьером и сборщиком, вакансии доставки ${SITE_YEAR}`,
-      description: `Работа в доставке ${city.namePrepositional}: все крупные сервисы, подключение от 18 лет за 1-2 дня. Помогаем оформиться, для соискателя бесплатно.`,
+      description: `Работа в доставке ${city.namePrepositional}: все крупные сервисы, подключение с 16 или 18 лет за 1-2 дня. Помогаем оформиться, для соискателя бесплатно.`,
       alternates: { canonical: absUrl(`/${slug}/`) },
     };
   }

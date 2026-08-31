@@ -34,8 +34,8 @@ export default function CityView({ city }: { city: City }) {
 
           <p className="mt-4 text-lg leading-relaxed">
             {city.namePrepositional.charAt(0).toUpperCase() + city.namePrepositional.slice(1)} можно
-            выйти в доставку в течение 1-2 дней: работают все крупные сервисы, подключение от 18 лет,
-            оплата за заказы или смены. {city.localNote}
+            выйти в доставку в течение 1-2 дней: работают все крупные сервисы, часть подключает
+            с 16 лет, оплата за заказы или смены. {city.localNote}
           </p>
 
           <div className="mt-4">
@@ -46,7 +46,7 @@ export default function CityView({ city }: { city: City }) {
             <TldrBlock
               items={[
                 `Сервисы ${city.namePrepositional}: доставка еды, продуктов, склады`,
-                'Подключение от 18 лет, помогаем с документами',
+                'Подключение с 16 или 18 лет в зависимости от сервиса, помогаем с документами',
                 'Пешком, на велосипеде или авто',
                 'Выплаты еженедельно, для соискателя бесплатно',
               ]}
