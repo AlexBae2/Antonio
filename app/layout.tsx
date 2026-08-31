@@ -24,6 +24,16 @@ export const metadata: Metadata = {
     'Подбор работы курьером и сборщиком заказов в сервисах доставки: помогаем выбрать сервис, оформить самозанятость и выйти на первую смену. Бесплатно для соискателя.',
   // Стенд на GitHub Pages полностью закрыт от индексации и AI-краулеров
   robots: IS_GITHUB ? { index: false, follow: false } : { index: true, follow: true },
+  // Подтверждение прав в Search Console (наш аккаунт) и Вебмастере (аккаунт Антонио).
+  // Метатеги удалять нельзя даже после успешной проверки: оба сервиса перепроверяют
+  // их периодически и снимают подтверждение, если тег пропал. На стенде не нужны -
+  // коды выданы на smenaru.ru.
+  verification: IS_GITHUB
+    ? undefined
+    : {
+        google: 'ifAGt54yNVSHW7zZZ3a-nsjxTLAKRmVdzfeWQGekFAk',
+        yandex: '5f2e78df6f6a10ec',
+      },
   openGraph: {
     type: 'website',
     locale: 'ru_RU',
