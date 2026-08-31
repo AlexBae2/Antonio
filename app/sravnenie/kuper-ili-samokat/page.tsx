@@ -91,7 +91,7 @@ export default function KuperIliSamokatPage() {
                 <li>планируете работать на своём авто или велосипеде</li>
                 <li>предпочитаете спокойные интервалы доставки</li>
               </ul>
-              <Link href="/kurier-zakazy-iz-magazinov/" className="mt-3 inline-block text-sm font-semibold text-amber hover:text-amber-deep">
+              <Link href="/kurier-zakazy-iz-magazinov/" className="mt-3 inline-flex min-h-11 items-center text-sm font-semibold text-amber hover:text-amber-deep">
                 Условия в Купере →
               </Link>
             </div>
@@ -102,7 +102,7 @@ export default function KuperIliSamokatPage() {
                 <li>любите быстрый темп и короткие маршруты</li>
                 <li>готовы бронировать смены заранее</li>
               </ul>
-              <Link href="/kurier-express-dostavka/" className="mt-3 inline-block text-sm font-semibold text-amber hover:text-amber-deep">
+              <Link href="/kurier-express-dostavka/" className="mt-3 inline-flex min-h-11 items-center text-sm font-semibold text-amber hover:text-amber-deep">
                 Условия в Самокате →
               </Link>
             </div>

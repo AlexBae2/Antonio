@@ -144,7 +144,7 @@ export default function ServiceView({ service }: { service: Service }) {
                 <Link
                   key={c.slug}
                   href={CITIES.find((x) => x.slug === c.slug)?.services.includes(service.slug) ? `/${c.slug}/${service.slug}/` : `/${c.slug}/`}
-                  className="rounded-full border border-line px-3 py-1 text-sm transition-colors hover:border-amber"
+                  className="inline-flex min-h-11 items-center rounded-full border border-line px-4 py-2 text-sm transition-colors hover:border-amber"
                 >
                   {c.name}
                 </Link>

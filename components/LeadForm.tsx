@@ -210,9 +210,9 @@ export default function LeadForm() {
 
   return (
     <div id="zayavka" className="scroll-mt-24 rounded-2xl border border-line bg-card p-5 shadow-card">
-      <div className="flex items-center justify-between gap-3">
+      <div className="flex flex-wrap items-center justify-between gap-2">
         <h2 className="font-display text-xl font-semibold">Заявка на подключение</h2>
-        <span className="rounded-full bg-money-soft px-3 py-1 text-xs font-semibold text-money">
+        <span className="shrink-0 whitespace-nowrap rounded-full bg-money-soft px-3 py-1 text-xs font-semibold text-money">
           Бесплатно для соискателя
         </span>
       </div>
@@ -222,11 +222,11 @@ export default function LeadForm() {
         <div className="h-full rounded-full bg-amber transition-all duration-300" style={{ width: `${progress}%` }} />
       </div>
 
-      <div className="mt-5 min-h-[220px]">
+      <div key={step} className="@container step-in mt-5 min-h-[220px]">
         {step === 'city' && (
           <fieldset>
             <legend className="font-semibold">Шаг 1. В каком городе ищете работу?</legend>
-            <div className="mt-3 grid grid-cols-2 gap-2 sm:grid-cols-3">
+            <div className="mt-3 grid grid-cols-2 gap-2 @md:grid-cols-3">
               {CITIES.map((c) => (
                 <button
                   key={c.slug}
@@ -293,7 +293,7 @@ export default function LeadForm() {
                 value={lead.citizenship}
                 onChange={(e) => setLead((l) => ({ ...l, citizenship: e.target.value }))}
                 aria-label="Гражданство"
-                className="tap rounded-xl border-2 border-line bg-card px-3 text-sm outline-none focus:border-amber"
+                className="tap min-w-0 flex-1 basis-40 rounded-xl border-2 border-line bg-card px-3 text-sm outline-none focus:border-amber"
               >
                 <option value="РФ">Гражданство РФ</option>
                 <option value="ЕАЭС">ЕАЭС (Беларусь, Казахстан, Армения, Киргизия)</option>
@@ -310,7 +310,7 @@ export default function LeadForm() {
           <fieldset>
             <legend className="font-semibold">Шаг 3. Где хотите работать?</legend>
             <p className="mt-1 text-sm text-ink-soft">{serviceStepHint}</p>
-            <div className="mt-3 grid gap-2 sm:grid-cols-2">
+            <div className="mt-3 grid gap-2 @md:grid-cols-2">
               {availableServices.map((s) => (
                 <button
                   key={s.slug}

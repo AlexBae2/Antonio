@@ -98,7 +98,7 @@ export default function Calculator() {
                     key={t.id}
                     type="button"
                     onClick={() => setTransport(t.id)}
-                    className={`tap rounded-xl border-2 px-3 py-2 text-sm font-semibold transition-colors ${
+                    className={`tap hyphens-auto rounded-xl border-2 px-3 py-2 text-sm font-semibold transition-colors ${
                       transport === t.id ? 'border-amber bg-amber-soft' : 'border-line hover:border-amber'
                     }`}
                   >
@@ -120,7 +120,7 @@ export default function Calculator() {
                 max={7}
                 value={days}
                 onChange={(e) => setDays(Number(e.target.value))}
-                className="mt-2 w-full accent-amber"
+                className="mt-2 h-11 w-full accent-amber"
               />
             ) : (
               <input
@@ -129,7 +129,7 @@ export default function Calculator() {
                 max={12}
                 value={hours}
                 onChange={(e) => setHours(Number(e.target.value))}
-                className="mt-2 w-full accent-amber"
+                className="mt-2 h-11 w-full accent-amber"
               />
             )}
           </label>
@@ -143,7 +143,7 @@ export default function Calculator() {
                 max={7}
                 value={days}
                 onChange={(e) => setDays(Number(e.target.value))}
-                className="mt-2 w-full accent-amber"
+                className="mt-2 h-11 w-full accent-amber"
               />
             </label>
           )}

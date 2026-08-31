@@ -89,11 +89,11 @@ export default function Quiz() {
 
   if (done) {
     return (
-      <div className="rounded-2xl border border-line bg-card p-5 shadow-card">
+      <div className="step-in rounded-2xl border border-line bg-card p-5 shadow-card">
         <h2 className="font-display text-xl font-semibold">Вам подойдёт</h2>
         <div className="mt-4 grid gap-3 sm:grid-cols-2">
           {recommendations.map((s, i) => (
-            <div key={s.slug} className={`rounded-2xl border-2 p-4 ${i === 0 ? 'border-amber bg-amber-soft' : 'border-line'}`}>
+            <div key={s.slug} className={`reveal reveal-${i + 1} rounded-2xl border-2 p-4 ${i === 0 ? 'border-amber bg-amber-soft' : 'border-line'}`}>
               {i === 0 && <span className="text-xs font-bold uppercase tracking-wide text-amber-deep">Лучший вариант</span>}
               <h3 className="mt-1 font-display font-semibold">{s.brandShort}</h3>
               <p className="mt-1 text-sm text-ink-soft">{s.category}</p>
@@ -143,19 +143,21 @@ export default function Quiz() {
           style={{ width: `${(step / QUESTIONS.length) * 100}%` }}
         />
       </div>
-      <h2 className="mt-4 font-display text-xl font-semibold">{q.title}</h2>
-      <div className="mt-4 grid gap-2 sm:grid-cols-2">
-        {q.options.map((opt) => (
-          <button
-            key={opt.value}
-            type="button"
-            onClick={() => answer(q.key, opt.value)}
-            className="tap rounded-xl border-2 border-line px-4 py-3 text-left transition-colors hover:border-amber"
-          >
-            <span className="font-semibold">{opt.label}</span>
-            <span className="block text-sm text-ink-soft">{opt.note}</span>
-          </button>
-        ))}
+      <div key={step} className="step-in">
+        <h2 className="mt-4 font-display text-xl font-semibold">{q.title}</h2>
+        <div className="mt-4 grid gap-2 sm:grid-cols-2">
+          {q.options.map((opt) => (
+            <button
+              key={opt.value}
+              type="button"
+              onClick={() => answer(q.key, opt.value)}
+              className="tap rounded-xl border-2 border-line px-4 py-3 text-left transition-colors hover:border-amber"
+            >
+              <span className="font-semibold">{opt.label}</span>
+              <span className="block text-sm text-ink-soft">{opt.note}</span>
+            </button>
+          ))}
+        </div>
       </div>
     </div>
   );

@@ -1,5 +1,6 @@
 import Link from 'next/link';
 import { SITE_NAME } from '@/lib/site';
+import MobileNav from './MobileNav';
 
 const NAV = [
   { href: '/#servisy', label: 'Сервисы' },
@@ -18,19 +19,22 @@ export default function Header() {
           <span className="route-dot" aria-hidden />
           <span className="font-display text-lg font-semibold tracking-tight">{SITE_NAME}</span>
         </Link>
-        <nav className="hidden items-center gap-5 text-sm md:flex" aria-label="Основная навигация">
+        <nav className="hidden items-center gap-5 text-sm lg:flex" aria-label="Основная навигация">
           {NAV.map((item) => (
             <Link key={item.href} href={item.href} className="tap flex items-center opacity-90 transition-opacity hover:opacity-100">
               {item.label}
             </Link>
           ))}
         </nav>
-        <Link
-          href="/#zayavka"
-          className="tap inline-flex items-center rounded-full bg-amber px-4 py-2 text-sm font-semibold text-white transition-colors hover:bg-amber-deep"
-        >
-          Оставить заявку
-        </Link>
+        <div className="flex items-center gap-2">
+          <Link
+            href="/#zayavka"
+            className="tap inline-flex items-center rounded-full bg-amber px-4 py-2 text-sm font-semibold text-white transition-colors hover:bg-amber-deep"
+          >
+            Оставить заявку
+          </Link>
+          <MobileNav items={NAV} />
+        </div>
       </div>
     </header>
   );

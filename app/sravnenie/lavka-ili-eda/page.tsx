@@ -92,7 +92,7 @@ export default function LavkaIliEdaPage() {
                 <li>цените предсказуемый график смен</li>
                 <li>не готовы вкладываться в транспорт</li>
               </ul>
-              <Link href="/kurier-produkty-darkstore/" className="mt-3 inline-block text-sm font-semibold text-amber hover:text-amber-deep">
+              <Link href="/kurier-produkty-darkstore/" className="mt-3 inline-flex min-h-11 items-center text-sm font-semibold text-amber hover:text-amber-deep">
                 Условия в Лавке →
               </Link>
             </div>
@@ -103,7 +103,7 @@ export default function LavkaIliEdaPage() {
                 <li>готовы ездить по району ради больших максимумов</li>
                 <li>рассматриваете работу на авто или велосипеде</li>
               </ul>
-              <Link href="/kurier-dostavka-edy/" className="mt-3 inline-block text-sm font-semibold text-amber hover:text-amber-deep">
+              <Link href="/kurier-dostavka-edy/" className="mt-3 inline-flex min-h-11 items-center text-sm font-semibold text-amber hover:text-amber-deep">
                 Условия в Еде →
               </Link>
             </div>

@@ -136,7 +136,7 @@ export default function HomePage() {
               <Link
                 key={c.slug}
                 href={`/${c.slug}/`}
-                className="rounded-full border border-line px-3 py-1 transition-colors hover:border-amber"
+                className="inline-flex min-h-11 items-center rounded-full border border-line px-4 py-2 transition-colors hover:border-amber"
               >
                 {c.name}
               </Link>

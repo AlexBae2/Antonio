@@ -95,7 +95,41 @@ body {
   .reveal { opacity: 1; }
 }
 
+/*
+  У fieldset браузерный min-inline-size: min-content, поэтому он растягивается
+  под самый широкий вариант внутри (например длинную опцию select) и распирает
+  карточку за пределы экрана. Сбрасываем.
+*/
+fieldset {
+  min-inline-size: 0;
+}
+
 /* Крупные тач-таргеты для мобильных */
 .tap {
   min-height: 48px;
+}
+
+/* Смена шага в форме и квизе: короткое проявление со сдвигом */
+@media (prefers-reduced-motion: no-preference) {
+  .step-in {
+    animation: step-in 0.32s cubic-bezier(0.22, 1, 0.36, 1) both;
+  }
+
+  @keyframes step-in {
+    from {
+      opacity: 0;
+      transform: translateY(8px);
+    }
+  }
+
+  .menu-drop {
+    animation: menu-drop 0.2s cubic-bezier(0.22, 1, 0.36, 1) both;
+  }
+
+  @keyframes menu-drop {
+    from {
+      opacity: 0;
+      transform: translateY(-6px);
+    }
+  }
 }
