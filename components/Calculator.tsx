@@ -1,6 +1,6 @@
 'use client';
 
-import { useEffect, useMemo, useState } from 'react';
+import { useEffect, useMemo, useRef, useState } from 'react';
 import Link from 'next/link';
 import { SERVICES } from '@/lib/data/services';
 import { CITIES } from '@/lib/data/cities';
@@ -19,21 +19,52 @@ function fmt(n: number): string {
   return n.toLocaleString('ru-RU');
 }
 
-export default function Calculator() {
-  const [service, setService] = useState('kurier-dostavka-edy');
-  const [city, setCity] = useState('moskva');
+interface CalculatorProps {
+  /** предзаполнение, когда калькулятор встроен в страницу сервиса или города */
+  initialService?: string;
+  initialCity?: string;
+  /** одна колонка: калькулятор стоит в узком контенте, а не на своей странице */
+  stacked?: boolean;
+}
+
+export default function Calculator({ initialService, initialCity, stacked = false }: CalculatorProps = {}) {
+  const embedded = Boolean(initialService || initialCity);
+  const [service, setService] = useState(() =>
+    initialService && hasCalcModel(initialService) ? initialService : 'kurier-dostavka-edy',
+  );
+  const [city, setCity] = useState(() =>
+    initialCity && CITIES.some((x) => x.slug === initialCity) ? initialCity : 'moskva',
+  );
   const [transport, setTransport] = useState('foot');
   const [hours, setHours] = useState(6);
   const [days, setDays] = useState(5);
-  const [counted, setCounted] = useState(false);
+  const counted = useRef(false);
 
   useEffect(() => {
+    // на встроенном калькуляторе сервис и город задаёт сама страница
+    if (embedded) return;
     const params = new URLSearchParams(window.location.search);
     const s = params.get('service');
     const c = params.get('city');
     if (s && hasCalcModel(s)) setService(s);
     if (c && CITIES.some((x) => x.slug === c)) setCity(c);
-  }, []);
+  }, [embedded]);
+
+  /**
+   * Цель шлём по первому действию пользователя, а не по факту отрисовки:
+   * калькулятор встроен в гео-страницы, и на рендер цель срабатывала бы
+   * на каждом визите, а по ней могут обучаться стратегии Директа.
+   */
+  function markUsed() {
+    if (counted.current) return;
+    counted.current = true;
+    try {
+      const id = Number(process.env.NEXT_PUBLIC_METRIKA_ID || 0);
+      if (id && window.ym) window.ym(id, 'reachGoal', 'calc_used');
+    } catch {
+      /* необязательно */
+    }
+  }
 
   const isShiftBased = Boolean(PAY_PER_SHIFT[service]);
 
@@ -42,27 +73,18 @@ export default function Calculator() {
     [service, city, transport, hours, days],
   );
 
-  useEffect(() => {
-    if (!counted && result) {
-      setCounted(true);
-      try {
-        const id = Number(process.env.NEXT_PUBLIC_METRIKA_ID || 0);
-        if (id && window.ym) window.ym(id, 'reachGoal', 'calc_used');
-      } catch {
-        /* необязательно */
-      }
-    }
-  }, [result, counted]);
-
   return (
-    <div className="grid gap-6 lg:grid-cols-[1fr_380px]">
+    <div className={stacked ? 'grid gap-6' : 'grid gap-6 lg:grid-cols-[1fr_380px]'}>
       <div className="rounded-2xl border border-line bg-card p-5 shadow-card">
         <div className="space-y-4">
           <label className="block">
             <span className="text-sm font-semibold">Сервис</span>
             <select
               value={service}
-              onChange={(e) => setService(e.target.value)}
+              onChange={(e) => {
+                markUsed();
+                setService(e.target.value);
+              }}
               className="tap mt-1 w-full rounded-xl border-2 border-line bg-card px-3 text-sm outline-none focus:border-amber"
             >
               {CALC_SERVICES.map((s) => (
@@ -77,7 +99,10 @@ export default function Calculator() {
             <span className="text-sm font-semibold">Город</span>
             <select
               value={city}
-              onChange={(e) => setCity(e.target.value)}
+              onChange={(e) => {
+                markUsed();
+                setCity(e.target.value);
+              }}
               className="tap mt-1 w-full rounded-xl border-2 border-line bg-card px-3 text-sm outline-none focus:border-amber"
             >
               {CITIES.map((c) => (
@@ -97,7 +122,10 @@ export default function Calculator() {
                   <button
                     key={t.id}
                     type="button"
-                    onClick={() => setTransport(t.id)}
+                    onClick={() => {
+                      markUsed();
+                      setTransport(t.id);
+                    }}
                     className={`tap hyphens-auto rounded-xl border-2 px-3 py-2 text-sm font-semibold transition-colors ${
                       transport === t.id ? 'border-amber bg-amber-soft' : 'border-line hover:border-amber'
                     }`}
@@ -119,7 +147,10 @@ export default function Calculator() {
                 min={2}
                 max={7}
                 value={days}
-                onChange={(e) => setDays(Number(e.target.value))}
+                onChange={(e) => {
+                  markUsed();
+                  setDays(Number(e.target.value));
+                }}
                 className="mt-2 h-11 w-full accent-amber"
               />
             ) : (
@@ -128,7 +159,10 @@ export default function Calculator() {
                 min={2}
                 max={12}
                 value={hours}
-                onChange={(e) => setHours(Number(e.target.value))}
+                onChange={(e) => {
+                  markUsed();
+                  setHours(Number(e.target.value));
+                }}
                 className="mt-2 h-11 w-full accent-amber"
               />
             )}
@@ -142,7 +176,10 @@ export default function Calculator() {
                 min={1}
                 max={7}
                 value={days}
-                onChange={(e) => setDays(Number(e.target.value))}
+                onChange={(e) => {
+                  markUsed();
+                  setDays(Number(e.target.value));
+                }}
                 className="mt-2 h-11 w-full accent-amber"
               />
             </label>
@@ -179,7 +216,7 @@ export default function Calculator() {
           <p className="mt-4 text-sm opacity-75">Выберите сервис и транспорт</p>
         )}
         <Link
-          href={`/?service=${service}&city=${city}#zayavka`}
+          href={embedded ? '#zayavka' : `/?service=${service}&city=${city}#zayavka`}
           className="tap mt-6 inline-flex items-center justify-center rounded-xl bg-amber px-5 py-3 font-semibold text-white transition-colors hover:bg-amber-deep"
         >
           Оставить заявку на эти условия

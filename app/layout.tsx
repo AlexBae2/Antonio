@@ -5,6 +5,7 @@ import Header from '@/components/Header';
 import Footer from '@/components/Footer';
 import StickyBar from '@/components/StickyBar';
 import Metrika from '@/components/Metrika';
+import Engagement from '@/components/Engagement';
 
 /*
   Шрифты лежат в public/fonts и подключаются своим CSS, а не через next/font/google.
@@ -57,6 +58,7 @@ export default function RootLayout({ children }: { children: React.ReactNode }) 
         <Footer />
         <StickyBar />
         <Metrika />
+        <Engagement />
       </body>
     </html>
   );

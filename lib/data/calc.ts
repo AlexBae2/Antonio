@@ -48,6 +48,19 @@ export function hasCalcModel(slug: string): boolean {
   return Boolean(PAY_PER_ORDER[slug] || PAY_PER_SHIFT[slug]);
 }
 
+/**
+ * Транспорт из карточки сервиса -> профиль калькулятора.
+ * Нужен, чтобы на гео-странице посчитать вилку по тем видам транспорта,
+ * которые у этого сервиса реально есть.
+ */
+export const TRANSPORT_PROFILE_BY_LABEL: Record<string, string> = {
+  пешком: 'foot',
+  велосипед: 'bike',
+  электровелосипед: 'ebike',
+  самокат: 'ebike',
+  авто: 'car',
+};
+
 /** Множитель плотности заказов по городам (Москва = 1) */
 export const CITY_FACTOR: Record<string, number> = {
   moskva: 1,
