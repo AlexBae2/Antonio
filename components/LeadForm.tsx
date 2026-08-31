@@ -57,6 +57,8 @@ export default function LeadForm() {
   });
   const [error, setError] = useState('');
   const [sending, setSending] = useState(false);
+  const cardRef = useRef<HTMLDivElement>(null);
+  const stepRendered = useRef(false);
   const startedAt = useRef<number>(0);
   const draftSent = useRef(false);
   // honeypot: скрытое поле, боты его заполняют
@@ -72,6 +74,23 @@ export default function LeadForm() {
       city: preCity && CITIES.some((c) => c.slug === preCity) ? preCity : l.city,
     }));
   }, []);
+
+  /*
+    Шаги очень разной высоты: список из 11 сервисов на 360px даёт 852px, а
+    следующий шаг с телефоном 471px. Карточка схлопывается почти на 400px, и
+    человек, который дошёл до низа списка, оказывается в подвале страницы.
+    Возвращаем к началу карточки, но только когда её верх реально уехал за экран.
+  */
+  useEffect(() => {
+    if (!stepRendered.current) {
+      stepRendered.current = true;
+      return;
+    }
+    const el = cardRef.current;
+    if (el && el.getBoundingClientRect().top < 0) {
+      el.scrollIntoView({ block: 'start' });
+    }
+  }, [step]);
 
   const steps: Step[] = ['city', 'age', 'service', 'phone'];
   const stepIndex = steps.indexOf(step);
@@ -209,7 +228,7 @@ export default function LeadForm() {
   }
 
   return (
-    <div id="zayavka" className="scroll-mt-24 rounded-2xl border border-line bg-card p-5 shadow-card">
+    <div id="zayavka" ref={cardRef} className="scroll-mt-24 rounded-2xl border border-line bg-card p-5 shadow-card">
       <div className="flex flex-wrap items-center justify-between gap-2">
         <h2 className="font-display text-xl font-semibold">Заявка на подключение</h2>
         <span className="shrink-0 whitespace-nowrap rounded-full bg-money-soft px-3 py-1 text-xs font-semibold text-money">
@@ -310,7 +329,7 @@ export default function LeadForm() {
           <fieldset>
             <legend className="font-semibold">Шаг 3. Где хотите работать?</legend>
             <p className="mt-1 text-sm text-ink-soft">{serviceStepHint}</p>
-            <div className="mt-3 grid gap-2 @md:grid-cols-2">
+            <div className="mt-3 grid grid-cols-2 gap-2">
               {availableServices.map((s) => (
                 <button
                   key={s.slug}
@@ -416,7 +435,9 @@ export default function LeadForm() {
         )}
       </div>
 
-      {error && <p className="mt-3 rounded-lg bg-amber-soft px-3 py-2 text-sm text-amber-deep">{error}</p>}
+      <div aria-live="polite">
+        {error && <p className="mt-3 rounded-lg bg-amber-soft px-3 py-2 text-sm text-amber-deep">{error}</p>}
+      </div>
 
       {/*
         Honeypot держим последним полем формы. Когда он стоял первым, в него

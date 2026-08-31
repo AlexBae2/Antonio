@@ -1,6 +1,6 @@
 'use client';
 
-import { useState } from 'react';
+import { useEffect, useRef, useState } from 'react';
 import Link from 'next/link';
 import { SERVICES } from '@/lib/data/services';
 
@@ -66,6 +66,20 @@ const QUESTIONS: {
 export default function Quiz() {
   const [step, setStep] = useState(0);
   const [answers, setAnswers] = useState<Answers>({ place: '', transport: '', time: '', priority: '' });
+  const cardRef = useRef<HTMLDivElement>(null);
+  const stepRendered = useRef(false);
+
+  // экран результата выше вопроса, поэтому возвращаем к началу карточки
+  useEffect(() => {
+    if (!stepRendered.current) {
+      stepRendered.current = true;
+      return;
+    }
+    const el = cardRef.current;
+    if (el && el.getBoundingClientRect().top < 0) {
+      el.scrollIntoView({ block: 'start' });
+    }
+  }, [step]);
 
   const done = step >= QUESTIONS.length || (answers.place === 'indoor' && step >= 1);
   const recommendations = done
@@ -89,7 +103,7 @@ export default function Quiz() {
 
   if (done) {
     return (
-      <div className="step-in rounded-2xl border border-line bg-card p-5 shadow-card">
+      <div ref={cardRef} className="step-in scroll-mt-24 rounded-2xl border border-line bg-card p-5 shadow-card">
         <h2 className="font-display text-xl font-semibold">Вам подойдёт</h2>
         <div className="mt-4 grid gap-3 sm:grid-cols-2">
           {recommendations.map((s, i) => (
@@ -130,7 +144,7 @@ export default function Quiz() {
 
   const q = QUESTIONS[step];
   return (
-    <div className="rounded-2xl border border-line bg-card p-5 shadow-card">
+    <div ref={cardRef} className="scroll-mt-24 rounded-2xl border border-line bg-card p-5 shadow-card">
       <div className="flex items-center justify-between text-xs text-ink-soft">
         <span>
           Вопрос {step + 1} из {QUESTIONS.length}
@@ -144,8 +158,8 @@ export default function Quiz() {
         />
       </div>
       <div key={step} className="step-in">
-        <h2 className="mt-4 font-display text-xl font-semibold">{q.title}</h2>
-        <div className="mt-4 grid gap-2 sm:grid-cols-2">
+        <h2 className="mt-4 min-h-14 font-display text-xl font-semibold sm:min-h-0">{q.title}</h2>
+        <div className="mt-4 grid min-h-58 content-start gap-2 sm:min-h-38 sm:grid-cols-2">
           {q.options.map((opt) => (
             <button
               key={opt.value}
