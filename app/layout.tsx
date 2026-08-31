@@ -4,6 +4,7 @@ import { BASE_PATH, IS_GITHUB, SITE_NAME, SITE_TAGLINE, SITE_URL } from '@/lib/s
 import Header from '@/components/Header';
 import Footer from '@/components/Footer';
 import StickyBar from '@/components/StickyBar';
+import Metrika from '@/components/Metrika';
 
 /*
   Шрифты лежат в public/fonts и подключаются своим CSS, а не через next/font/google.
@@ -45,6 +46,7 @@ export default function RootLayout({ children }: { children: React.ReactNode }) 
         <main className="flex-1">{children}</main>
         <Footer />
         <StickyBar />
+        <Metrika />
       </body>
     </html>
   );
