@@ -1,4 +1,4 @@
-import type { Metadata } from 'next';
+import type { Metadata, Viewport } from 'next';
 import './globals.css';
 import { BASE_PATH, IS_GITHUB, SITE_NAME, SITE_TAGLINE, SITE_URL } from '@/lib/site';
 import Header from '@/components/Header';
@@ -43,6 +43,11 @@ export const metadata: Metadata = {
     description:
       'Работа курьером, сборщиком, водителем или сменами в сервисах доставки. Помогаем оформиться и выйти на смену. Бесплатно для соискателя.',
   },
+};
+
+// Цвет адресной строки в мобильных браузерах - тот же графит, что у шапки
+export const viewport: Viewport = {
+  themeColor: '#201e1b',
 };
 
 export default function RootLayout({ children }: { children: React.ReactNode }) {

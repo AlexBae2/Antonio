@@ -8,7 +8,8 @@
  * Здесь только node:zlib, поэтому скрипт работает и локально, и в CI.
  *
  * Запуск: node scripts/generate-icons.mjs
- * На выходе: app/favicon.ico (16/32/48) и app/apple-icon.png (180).
+ * На выходе: app/favicon.ico (16/32/48), app/apple-icon.png (180)
+ * и public/icon-192.png с public/icon-512.png для манифеста.
  * Геометрия ниже повторяет app/icon.svg - правите знак, прогоните скрипт.
  */
 import { deflateSync } from 'node:zlib';
@@ -16,7 +17,9 @@ import { writeFileSync } from 'node:fs';
 import { dirname, join } from 'node:path';
 import { fileURLToPath } from 'node:url';
 
-const APP_DIR = join(dirname(fileURLToPath(import.meta.url)), '..', 'app');
+const ROOT = join(dirname(fileURLToPath(import.meta.url)), '..');
+const APP_DIR = join(ROOT, 'app');
+const PUBLIC_DIR = join(ROOT, 'public');
 
 const GRAPHITE = [0x20, 0x1e, 0x1b];
 const PAPER = [0xfa, 0xf8, 0xf5];
@@ -183,5 +186,15 @@ writeFileSync(join(APP_DIR, 'favicon.ico'), ico);
 const apple = encodePng(180, render(180, false));
 writeFileSync(join(APP_DIR, 'apple-icon.png'), apple);
 
-console.log(`app/favicon.ico   ${ico.length} B (48/32/16)`);
+// Иконки манифеста: их читают Android и робот Google, когда выбирает значок сайта
+const manifestIcons = [192, 512].map((size) => {
+  const png = encodePng(size, render(size, true));
+  writeFileSync(join(PUBLIC_DIR, `icon-${size}.png`), png);
+  return { size, png };
+});
+
+console.log(`app/favicon.ico    ${ico.length} B (48/32/16)`);
 console.log(`app/apple-icon.png ${apple.length} B (180x180)`);
+for (const { size, png } of manifestIcons) {
+  console.log(`public/icon-${size}.png ${png.length} B (${size}x${size})`);
+}

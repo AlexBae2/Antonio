@@ -171,6 +171,9 @@ export default function HomePage() {
           name: SITE_NAME,
           legalName: LEGAL.orgName,
           url: SITE_URL,
+          // Логотип в разметке - ещё одна подсказка поисковику, какой значок
+          // показывать рядом с сайтом в выдаче
+          logo: absUrl('/icon-512.png'),
           taxID: LEGAL.inn,
           email: LEGAL.email,
           ...(CONTACTS.phoneHref ? { telephone: CONTACTS.phoneHref } : {}),

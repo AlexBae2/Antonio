@@ -122,7 +122,11 @@ export default async function PostPage({ params }: { params: Promise<Params> }) 
           datePublished: post.publishAt,
           dateModified: post.updatedAt,
           author: { '@type': 'Organization', name: `Редакция ${SITE_NAME}` },
-          publisher: { '@type': 'Organization', name: SITE_NAME },
+          publisher: {
+            '@type': 'Organization',
+            name: SITE_NAME,
+            logo: { '@type': 'ImageObject', url: absUrl('/icon-512.png') },
+          },
           mainEntityOfPage: absUrl(`/blog/${post.slug}/`),
         }}
       />
