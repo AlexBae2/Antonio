@@ -98,7 +98,7 @@ export default async function CityServicePage({ params }: { params: Promise<Para
       .slice(0, 2)
       .map((c) => ({
         href: `/${c.slug}/${sub}/`,
-        title: `${service.brandShort} в ${c.name}`,
+        title: `${service.brandShort} ${c.namePrepositional}`,
         note: service.category,
       })),
   ];

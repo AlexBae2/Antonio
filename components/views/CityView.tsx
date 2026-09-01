@@ -18,7 +18,7 @@ export default function CityView({ city }: { city: City }) {
     .slice(0, 4)
     .map((c) => ({
       href: `/${c.slug}/`,
-      title: `Работа курьером в ${c.name}`,
+      title: `Работа курьером ${c.namePrepositional}`,
       note: 'вакансии сервисов доставки',
     }));
 
@@ -65,7 +65,7 @@ export default function CityView({ city }: { city: City }) {
                   <h3 className="font-semibold group-hover:text-amber-deep">{s.brandShort}</h3>
                   <p className="mt-1 text-sm text-ink-soft">{s.category}</p>
                   <span className="mt-2 inline-block text-sm font-semibold text-amber">
-                    Условия в {city.name} →
+                    Условия {city.namePrepositional} →
                   </span>
                 </Link>
               ))}

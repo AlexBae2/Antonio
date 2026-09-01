@@ -46,7 +46,8 @@ export default function RoleView({ role }: { role: Role }) {
               {role.suitedFor.map((item) => (
                 <li key={item} className="flex gap-2">
                   <span className="mt-[9px] h-[3px] w-3 shrink-0 rounded bg-amber" aria-hidden />
-                  <span className="capitalize">{item}</span>
+                  {/* только первая буква: CSS capitalize делал Каждое Слово Заглавным */}
+                  <span>{item.charAt(0).toUpperCase() + item.slice(1)}</span>
                 </li>
               ))}
             </ul>
