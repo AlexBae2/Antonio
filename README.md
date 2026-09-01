@@ -15,7 +15,8 @@ Next.js, две сборки из одного кода:
 | `NEXT_PUBLIC_SITE_URL` | Прод-домен для canonical/OG/sitemap (до покупки пусто) |
 | `NEXT_PUBLIC_METRIKA_ID` | Счётчик Яндекс Метрики |
 | `TELEGRAM_BOT_TOKEN` | Бот уведомлений колл-центра (телефон в сообщении маскируется) |
-| `TELEGRAM_CHAT_ID` | Чат колл-центра |
+| `TELEGRAM_CHAT_ID` | Получатели заявок; несколько id через запятую (каждый должен сам нажать Start у бота) |
+| `TELEGRAM_ADMIN_CHAT_ID` | Служебный канал: сбои доставки лидов и health-check идут только сюда |
 | `IP_HASH_SALT` | Соль хэширования IP в антифроде |
 | `ADMIN_TOKEN` | Доступ к мини-админке лидов `/admin?token=...` |
 

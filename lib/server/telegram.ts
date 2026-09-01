@@ -2,12 +2,51 @@
  * Уведомление колл-центра в Telegram.
  * Телефон в сообщении маскируется (152-ФЗ: полный номер только в админке на РФ-хостинге).
  * Без TELEGRAM_BOT_TOKEN/TELEGRAM_CHAT_ID уведомления просто не шлются (локальная отладка).
+ * В TELEGRAM_CHAT_ID можно перечислить несколько получателей через запятую.
+ * TELEGRAM_ADMIN_CHAT_ID это отдельный канал для служебных сообщений (сбои доставки,
+ * проверки), которые колл-центру видеть незачем.
  *
  * Отправка идёт напрямую, а при сетевой ошибке повторяется через прокси из
  * TELEGRAM_PROXY_URL, если он задан: на случай, если у хостера закроют доступ
  * к api.telegram.org. Заявка при любом исходе уже сохранена в базе, уведомление
  * упасть её не может.
  */
+
+/**
+ * Получатели уведомлений. TELEGRAM_CHAT_ID может содержать несколько id через запятую:
+ * заявку видят и колл-центр, и владелец сайта, каждый у себя в личке, без общего чата.
+ * Чтобы бот мог написать человеку первым, тот должен сам нажать Start у бота.
+ */
+export function chatIds(): string[] {
+  return (process.env.TELEGRAM_CHAT_ID ?? '')
+    .split(',')
+    .map((id) => id.trim())
+    .filter(Boolean);
+}
+
+/** Админ (он же дежурный по отладке): сюда идёт то, что не нужно колл-центру */
+export function adminChatId(): string | null {
+  return process.env.TELEGRAM_ADMIN_CHAT_ID?.trim() || null;
+}
+
+/**
+ * Служебное сообщение только админу. Ничего не бросает: это диагностика,
+ * из-за неё не должен падать ни лид, ни health-check.
+ */
+export async function notifyAdmin(text: string): Promise<void> {
+  const token = process.env.TELEGRAM_BOT_TOKEN;
+  const admin = adminChatId();
+  if (!token || !admin) return;
+
+  try {
+    await send(
+      `https://api.telegram.org/bot${token}/sendMessage`,
+      JSON.stringify({ chat_id: admin, text }),
+    );
+  } catch (err) {
+    console.error('[telegram] служебное сообщение админу не ушло', err);
+  }
+}
 
 export function maskPhone(phone: string): string {
   const digits = phone.replace(/\D/g, '');
@@ -100,8 +139,8 @@ export async function notifyLead(params: {
   riskScore: number;
 }): Promise<void> {
   const token = process.env.TELEGRAM_BOT_TOKEN;
-  const chatId = process.env.TELEGRAM_CHAT_ID;
-  if (!token || !chatId) return;
+  const recipients = chatIds();
+  if (!token || recipients.length === 0) return;
 
   const title = params.kind === 'new' ? '🟢 Новая заявка' : '🟡 Недозаполненная заявка (дозвонить)';
   const risk = params.riskScore >= 50 ? `\n⚠️ Риск-скор: ${params.riskScore}, проверить` : '';
@@ -117,18 +156,29 @@ export async function notifyLead(params: {
       `Телефон: ${formatPhone(params.phone)}`,
     ].join('\n') + risk;
 
-  try {
-    const { via } = await send(
-      `https://api.telegram.org/bot${token}/sendMessage`,
-      JSON.stringify({ chat_id: chatId, text }),
-    );
-    if (via !== 'direct') {
-      // видно в journalctl: значит прямой путь до телеграма отвалился
-      console.warn(`[telegram] уведомление о лиде ${params.id} ушло через ${via}`);
-    }
-  } catch (err) {
-    // Заявка уже в базе, поэтому уведомление не роняет запрос.
-    // Но молчать нельзя: без лога такие сбои не диагностируются.
-    console.error('[telegram] не удалось отправить уведомление о лиде', params.id, err);
-  }
+  // Каждому получателю отдельным запросом: если один заблокировал бота или у него
+  // неверный id, остальные всё равно получат заявку
+  await Promise.all(
+    recipients.map(async (chatId) => {
+      try {
+        const { via } = await send(
+          `https://api.telegram.org/bot${token}/sendMessage`,
+          JSON.stringify({ chat_id: chatId, text }),
+        );
+        if (via !== 'direct') {
+          // видно в journalctl: значит прямой путь до телеграма отвалился
+          console.warn(`[telegram] уведомление о лиде ${params.id} ушло в ${chatId} через ${via}`);
+        }
+      } catch (err) {
+        // Заявка уже в базе, поэтому уведомление не роняет запрос.
+        // Но молчать нельзя: без лога такие сбои не диагностируются.
+        console.error('[telegram] лид', params.id, 'не доехал до', chatId, err);
+        // В журнал никто не смотрит, пока не хватятся лида. Админу пишем сразу,
+        // остальным получателям такое знать незачем
+        await notifyAdmin(
+          `❗️Заявка #${params.id} не доехала до ${chatId}: ${err instanceof Error ? err.message : String(err)}`,
+        );
+      }
+    }),
+  );
 }
