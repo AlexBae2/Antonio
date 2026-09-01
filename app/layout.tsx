@@ -1,4 +1,4 @@
-import type { Metadata } from 'next';
+import type { Metadata, Viewport } from 'next';
 import './globals.css';
 import { BASE_PATH, IS_GITHUB, SITE_NAME, SITE_TAGLINE, SITE_URL } from '@/lib/site';
 import Header from '@/components/Header';
@@ -14,6 +14,11 @@ import Engagement from '@/components/Engagement';
   и CI). Свои файлы убирают внешнюю зависимость и лишний round-trip у посетителя.
   Пути внутри fonts.css относительные, поэтому basePath стенда учитывается сам.
 */
+
+// Красит системную обводку браузера на мобильных под графитовую шапку
+export const viewport: Viewport = {
+  themeColor: '#201e1b',
+};
 
 export const metadata: Metadata = {
   metadataBase: new URL(SITE_URL),

@@ -25,7 +25,7 @@ export default function BlogPage() {
         Разбираем работу курьером и сборщиком по фактам: официальные тарифы сервисов, оформление,
         честные плюсы и минусы. Без обещаний золотых гор.
       </p>
-      <div className="mt-8 space-y-4">
+      <div className="mt-8 grid gap-4 md:grid-cols-2">
         {posts.length === 0 && (
           <p className="rounded-2xl border border-line bg-card p-6 text-ink-soft">
             Первые статьи уже в работе: заходите через пару дней.

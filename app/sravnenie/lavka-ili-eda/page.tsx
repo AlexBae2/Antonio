@@ -52,7 +52,10 @@ export default function LavkaIliEdaPage() {
             <Disclaimer />
           </div>
 
-          <div className="mt-6 overflow-x-auto">
+          <p className="mt-6 text-xs text-ink-soft sm:hidden" aria-hidden>
+            Таблица листается вбок →
+          </p>
+          <div className="mt-1 overflow-x-auto sm:mt-6">
             <table className="w-full min-w-[560px] border-collapse text-sm">
               <caption className="pb-2 text-left text-xs text-ink-soft">
                 По официальным страницам сервисов. Данные на: 20.07.2026
@@ -87,7 +90,7 @@ export default function LavkaIliEdaPage() {
           <section className="mt-8 grid gap-4 sm:grid-cols-2">
             <div className="rounded-2xl border border-line bg-card p-4">
               <h2 className="font-display text-lg font-semibold">Лавка подойдёт, если вы</h2>
-              <ul className="mt-2 space-y-1 text-sm leading-relaxed text-ink-soft">
+              <ul className="mt-2 list-disc space-y-1 pl-4 text-sm leading-relaxed text-ink-soft marker:text-amber">
                 <li>хотите работать в одном районе без дальних поездок</li>
                 <li>цените предсказуемый график смен</li>
                 <li>не готовы вкладываться в транспорт</li>
@@ -98,7 +101,7 @@ export default function LavkaIliEdaPage() {
             </div>
             <div className="rounded-2xl border border-line bg-card p-4">
               <h2 className="font-display text-lg font-semibold">Еда подойдёт, если вы</h2>
-              <ul className="mt-2 space-y-1 text-sm leading-relaxed text-ink-soft">
+              <ul className="mt-2 list-disc space-y-1 pl-4 text-sm leading-relaxed text-ink-soft marker:text-amber">
                 <li>хотите полностью свободный график по слотам</li>
                 <li>готовы ездить по району ради больших максимумов</li>
                 <li>рассматриваете работу на авто или велосипеде</li>

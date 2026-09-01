@@ -49,7 +49,10 @@ export default function KuperIliSamokatPage() {
             <Disclaimer />
           </div>
 
-          <div className="mt-6 overflow-x-auto">
+          <p className="mt-6 text-xs text-ink-soft sm:hidden" aria-hidden>
+            Таблица листается вбок →
+          </p>
+          <div className="mt-1 overflow-x-auto sm:mt-6">
             <table className="w-full min-w-[560px] border-collapse text-sm">
               <caption className="pb-2 text-left text-xs text-ink-soft">
                 Купер: официальные страницы сервиса. Самокат: данные партнёров, уточняются (официальная
@@ -86,7 +89,7 @@ export default function KuperIliSamokatPage() {
           <section className="mt-8 grid gap-4 sm:grid-cols-2">
             <div className="rounded-2xl border border-line bg-card p-4">
               <h2 className="font-display text-lg font-semibold">Купер подойдёт, если вы</h2>
-              <ul className="mt-2 space-y-1 text-sm leading-relaxed text-ink-soft">
+              <ul className="mt-2 list-disc space-y-1 pl-4 text-sm leading-relaxed text-ink-soft marker:text-amber">
                 <li>хотите подключиться напрямую и быстро</li>
                 <li>планируете работать на своём авто или велосипеде</li>
                 <li>предпочитаете спокойные интервалы доставки</li>
@@ -97,7 +100,7 @@ export default function KuperIliSamokatPage() {
             </div>
             <div className="rounded-2xl border border-line bg-card p-4">
               <h2 className="font-display text-lg font-semibold">Самокат подойдёт, если вы</h2>
-              <ul className="mt-2 space-y-1 text-sm leading-relaxed text-ink-soft">
+              <ul className="mt-2 list-disc space-y-1 pl-4 text-sm leading-relaxed text-ink-soft marker:text-amber">
                 <li>хотите транспорт и экипировку от сервиса</li>
                 <li>любите быстрый темп и короткие маршруты</li>
                 <li>готовы бронировать смены заранее</li>

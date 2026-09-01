@@ -65,16 +65,26 @@ export default function HomePage() {
                   Подобрать сервис за 1 минуту
                 </Link>
               </div>
-              <div className="reveal reveal-4 mt-8 flex flex-wrap items-center gap-2 text-sm opacity-75 sm:gap-3">
-                <span className="route-dot" aria-hidden />
-                <span className="route-line w-10 sm:w-16" aria-hidden />
-                <span>заявка</span>
-                <span className="route-line w-6 sm:w-8" aria-hidden />
-                <span>звонок</span>
-                <span className="route-line w-6 sm:w-8" aria-hidden />
-                <span>оформление</span>
-                <span className="route-line w-6 sm:w-8" aria-hidden />
-                <span className="font-semibold text-amber">первая смена</span>
+              {/* Сегменты сгруппированы: при нехватке ширины перенос идёт целым
+                  шагом вместе с его пунктиром, а не оторванным словом */}
+              <div className="reveal reveal-4 mt-8 flex flex-wrap items-center gap-y-2 text-sm opacity-75">
+                <span className="flex items-center gap-2 sm:gap-3">
+                  <span className="route-dot" aria-hidden />
+                  <span className="route-line w-8 sm:w-12" aria-hidden />
+                  <span>заявка</span>
+                </span>
+                <span className="flex items-center gap-2 pl-2 sm:gap-3 sm:pl-3">
+                  <span className="route-line w-6 sm:w-8" aria-hidden />
+                  <span>звонок</span>
+                </span>
+                <span className="flex items-center gap-2 pl-2 sm:gap-3 sm:pl-3">
+                  <span className="route-line w-6 sm:w-8" aria-hidden />
+                  <span>оформление</span>
+                </span>
+                <span className="flex items-center gap-2 pl-2 sm:gap-3 sm:pl-3">
+                  <span className="route-line w-6 sm:w-8" aria-hidden />
+                  <span className="font-semibold text-amber">первая смена</span>
+                </span>
               </div>
             </div>
             <div className="md:justify-self-end">
