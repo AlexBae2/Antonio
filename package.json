@@ -7,6 +7,7 @@
     "build": "next build",
     "build:github": "node scripts/build-github.mjs",
     "build:server": "rm -rf .next && DEPLOY_TARGET=server next build",
+    "check:blog": "node scripts/check-blog.mjs",
     "start": "next start -p 3100",
     "lint": "next lint"
   },
