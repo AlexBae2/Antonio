@@ -146,9 +146,12 @@ export async function POST(req: NextRequest) {
       flags.join(',') || null,
     );
 
-  // высокорисковые (honeypot) не беспокоят колл-центр, но сохраняются для разбора
+  // высокорисковые (honeypot) не беспокоят колл-центр, но сохраняются для разбора.
+  // Не ждём отправку: с повторами она в худшем случае идёт под 18 секунд, а заявка
+  // уже в базе. Держать на этом форму значит показывать человеку спиннер вместо
+  // 'принято'. notifyLead ничего не бросает, поэтому висящий промис безопасен.
   if (risk < 60) {
-    await notifyLead({
+    void notifyLead({
       kind: isPartial ? 'partial' : 'new',
       id: Number(result.lastInsertRowid),
       city: String(body.city || ''),

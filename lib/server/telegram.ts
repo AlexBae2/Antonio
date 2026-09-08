@@ -10,6 +10,11 @@
  * TELEGRAM_PROXY_URL, если он задан: на случай, если у хостера закроют доступ
  * к api.telegram.org. Заявка при любом исходе уже сохранена в базе, уведомление
  * упасть её не может.
+ *
+ * Сверх этого каждая отправка повторяется до трёх раз. Путь до телеграма с этого VPS
+ * залипает именно на холодном коннекте: первый SYN пропадает и висит до таймаута,
+ * а следующий запрос по прогретому пути отвечает за 40-100 мс. Одной попытки поэтому
+ * мало, и таймаут держим коротким - быстрее повторить, чем ждать зависший сокет.
  */
 
 /**
@@ -85,7 +90,7 @@ async function getProxyDispatcher(proxyUrl: string): Promise<unknown> {
   return proxyDispatcher;
 }
 
-async function post(url: string, body: string, dispatcher?: unknown, timeoutMs = 8000) {
+async function post(url: string, body: string, dispatcher?: unknown, timeoutMs = 5000) {
   return fetch(url, {
     method: 'POST',
     headers: { 'Content-Type': 'application/json' },
@@ -96,17 +101,30 @@ async function post(url: string, body: string, dispatcher?: unknown, timeoutMs =
   } as RequestInit);
 }
 
+/** Сколько раз пробуем отправить одно сообщение, прежде чем считать его потерянным */
+export const SEND_ATTEMPTS = 3;
+
+/** Паузы перед 2-й и 3-й попытками: пути до телеграма нужно время, чтобы подняться */
+const RETRY_PAUSE_MS = [800, 2000];
+
+const sleep = (ms: number) => new Promise((resolve) => setTimeout(resolve, ms));
+
+/** Неверный chat_id или токен повтором не лечится, такое отдаём сразу */
+function isFatal(err: unknown): boolean {
+  return err instanceof Error && err.message.startsWith('Telegram отклонил');
+}
+
 /**
- * Отправка с деградацией: прямой запрос, при сбое повтор через прокси.
+ * Одна попытка с деградацией: прямой запрос, при сбое повтор через прокси.
  * TELEGRAM_FORCE_PROXY=1 отправляет сразу через прокси, минуя прямую попытку:
  * пригодится, если хостер закроет доступ к Telegram насовсем.
  */
-export async function send(url: string, body: string): Promise<{ res: Response; via: string }> {
+async function sendOnce(url: string, body: string): Promise<{ res: Response; via: string }> {
   const proxy = process.env.TELEGRAM_PROXY_URL;
   const force = process.env.TELEGRAM_FORCE_PROXY === '1';
 
   if (proxy && force) {
-    const res = await post(url, body, await getProxyDispatcher(proxy), 12000);
+    const res = await post(url, body, await getProxyDispatcher(proxy), 10000);
     if (!res.ok) throw new Error(`Telegram через прокси ответил ${res.status}`);
     return { res, via: 'proxy(forced)' };
   }
@@ -121,12 +139,32 @@ export async function send(url: string, body: string): Promise<{ res: Response; 
     throw new Error(`Telegram ответил ${res.status}`);
   } catch (err) {
     if (!proxy) throw err;
-    if (err instanceof Error && err.message.startsWith('Telegram отклонил')) throw err;
+    if (isFatal(err)) throw err;
 
-    const res = await post(url, body, await getProxyDispatcher(proxy), 12000);
+    const res = await post(url, body, await getProxyDispatcher(proxy), 10000);
     if (!res.ok) throw new Error(`Telegram через прокси ответил ${res.status}`);
     return { res, via: 'proxy(fallback)' };
   }
+}
+
+/** Отправка с повторами. Наружу отдаём номер удачной попытки: по нему видно, что путь залипал. */
+export async function send(
+  url: string,
+  body: string,
+): Promise<{ res: Response; via: string; attempt: number }> {
+  let last: unknown;
+
+  for (let attempt = 1; attempt <= SEND_ATTEMPTS; attempt++) {
+    try {
+      return { ...(await sendOnce(url, body)), attempt };
+    } catch (err) {
+      if (isFatal(err)) throw err;
+      last = err;
+      if (attempt < SEND_ATTEMPTS) await sleep(RETRY_PAUSE_MS[attempt - 1]);
+    }
+  }
+
+  throw last;
 }
 
 export async function notifyLead(params: {
@@ -161,13 +199,15 @@ export async function notifyLead(params: {
   await Promise.all(
     recipients.map(async (chatId) => {
       try {
-        const { via } = await send(
+        const { via, attempt } = await send(
           `https://api.telegram.org/bot${token}/sendMessage`,
           JSON.stringify({ chat_id: chatId, text }),
         );
-        if (via !== 'direct') {
-          // видно в journalctl: значит прямой путь до телеграма отвалился
-          console.warn(`[telegram] уведомление о лиде ${params.id} ушло в ${chatId} через ${via}`);
+        if (via !== 'direct' || attempt > 1) {
+          // видно в journalctl: значит с первого раза и напрямую не ушло
+          console.warn(
+            `[telegram] уведомление о лиде ${params.id} ушло в ${chatId} через ${via}, попытка ${attempt}`,
+          );
         }
       } catch (err) {
         // Заявка уже в базе, поэтому уведомление не роняет запрос.
@@ -176,7 +216,7 @@ export async function notifyLead(params: {
         // В журнал никто не смотрит, пока не хватятся лида. Админу пишем сразу,
         // остальным получателям такое знать незачем
         await notifyAdmin(
-          `❗️Заявка #${params.id} не доехала до ${chatId}: ${err instanceof Error ? err.message : String(err)}`,
+          `❗️Заявка #${params.id} не доехала до ${chatId} за ${SEND_ATTEMPTS} попытки: ${err instanceof Error ? err.message : String(err)}`,
         );
       }
     }),

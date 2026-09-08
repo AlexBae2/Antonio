@@ -31,14 +31,14 @@ export async function GET(req: NextRequest) {
     recipients.map(async (chatId) => {
       const at = Date.now();
       try {
-        const { via } = await send(
+        const { via, attempt } = await send(
           `https://api.telegram.org/bot${botToken}/sendMessage`,
           JSON.stringify({
             chat_id: chatId,
             text: 'Проверка канала уведомлений: заявки с сайта дойдут этим путём.',
           }),
         );
-        return { chatId, ok: true, via, ms: Date.now() - at };
+        return { chatId, ok: true, via, attempt, ms: Date.now() - at };
       } catch (err) {
         return { chatId, ok: false, ms: Date.now() - at, error: err instanceof Error ? err.message : String(err) };
       }
