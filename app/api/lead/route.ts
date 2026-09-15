@@ -1,7 +1,7 @@
 import { NextRequest, NextResponse } from 'next/server';
 import { createHash } from 'node:crypto';
 import { getDb } from '@/lib/server/db';
-import { notifyLead } from '@/lib/server/telegram';
+import { notifyLead, notifyRepeatLead } from '@/lib/server/telegram';
 
 export const dynamic = 'force-dynamic';
 
@@ -93,11 +93,11 @@ export async function POST(req: NextRequest) {
   // дедуп: если полный лид с этим телефоном уже есть за 30 дней - обновляем карточку, не плодим
   const existing = db
     .prepare(
-      `SELECT id, status FROM leads
+      `SELECT id, status, created_at FROM leads
        WHERE phone = ? AND status != 'partial' AND created_at > datetime('now', '-30 day')
        ORDER BY id DESC LIMIT 1`,
     )
-    .get(digits) as { id: number; status: string } | undefined;
+    .get(digits) as { id: number; status: string; created_at: string } | undefined;
 
   if (!isPartial && existing) {
     db.prepare(
@@ -106,6 +106,15 @@ export async function POST(req: NextRequest) {
         city = COALESCE(NULLIF(?, ''), city)
        WHERE id = ?`,
     ).run(String(body.service || ''), String(body.city || ''), existing.id);
+    // только админу и не дожидаясь: колл-центр карточку уже видел
+    void notifyRepeatLead({
+      id: existing.id,
+      name: String(body.name || ''),
+      city: String(body.city || ''),
+      service: String(body.service || ''),
+      phone: digits,
+      firstAt: existing.created_at,
+    });
     return NextResponse.json({ ok: true, deduped: true });
   }
 

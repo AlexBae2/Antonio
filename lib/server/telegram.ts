@@ -167,6 +167,42 @@ export async function send(
   throw last;
 }
 
+/** Время из sqlite (UTC, 'YYYY-MM-DD HH:MM:SS') в привычное для админа МСК */
+function formatMsk(sqliteUtc: string): string {
+  const d = new Date(sqliteUtc.replace(' ', 'T') + 'Z');
+  if (Number.isNaN(d.getTime())) return sqliteUtc;
+  const msk = new Date(d.getTime() + 3 * 60 * 60 * 1000);
+  const p = (n: number) => String(n).padStart(2, '0');
+  return `${p(msk.getUTCDate())}.${p(msk.getUTCMonth() + 1)}.${msk.getUTCFullYear()} ${p(msk.getUTCHours())}:${p(msk.getUTCMinutes())} МСК`;
+}
+
+export function repeatLeadText(params: {
+  id: number;
+  name: string;
+  city: string;
+  service: string;
+  phone: string;
+  firstAt: string;
+}): string {
+  return [
+    `🔁 Повторная заявка #${params.id}`,
+    `Город: ${params.city || 'не указан'}`,
+    `Сервис: ${SERVICE_NAMES[params.service] || params.service || 'не выбран'}`,
+    `Имя: ${params.name || 'не указано'}`,
+    `Телефон: ${formatPhone(params.phone)}`,
+    `Первый раз: ${formatMsk(params.firstAt)}`,
+  ].join('\n');
+}
+
+/**
+ * Повторная заявка с того же телефона (дедуп в /api/lead). Колл-центру она не нужна:
+ * карточка у них уже есть. Но и молчать нельзя: форма показала 'принято', цель в Метрике
+ * сработала, а в телеграме тишина - дважды это принимали за отвалившийся канал.
+ */
+export function notifyRepeatLead(params: Parameters<typeof repeatLeadText>[0]): Promise<void> {
+  return notifyAdmin(repeatLeadText(params));
+}
+
 export async function notifyLead(params: {
   kind: 'new' | 'partial';
   id: number;
