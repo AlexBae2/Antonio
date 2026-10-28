@@ -45,6 +45,7 @@ export default function sitemap(): MetadataRoute.Sitemap {
     ...CITIES.flatMap((c) => c.services.map((s) => url(`/${c.slug}/${s}/`, 0.7, cityService))),
     url('/kalkulyator-dohoda/', 0.8, lastCommit('app/kalkulyator-dohoda/page.tsx', 'lib/data/calc.ts')),
     url('/podbor/', 0.7, lastCommit('app/podbor/page.tsx')),
+    url('/kontakty/', 0.6, lastCommit('app/kontakty/page.tsx')),
     url('/sravnenie/lavka-ili-eda/', 0.7, lastCommit('app/sravnenie/lavka-ili-eda/page.tsx')),
     // Листинг блога меняется с каждой новой статьёй, поэтому дата - самая свежая из них
     url('/blog/', 0.7, blogIndexDate()),
