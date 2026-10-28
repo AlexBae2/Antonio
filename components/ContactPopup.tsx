@@ -3,13 +3,15 @@
 import { useEffect, useState } from 'react';
 import ContactActions from '@/components/ContactActions';
 
-const SHOW_AFTER_MS = 6000;
+const SHOW_AFTER_MS = 25000;
+const SHOW_AFTER_SCROLL = 0.4;
 const STORAGE_KEY = 'contact-popup-closed';
 
 /**
  * Прыгающий попап с контактами на главной.
  *
- * Появляется через несколько секунд, влетает с отскоком и дальше раз в пару
+ * Появляется не сразу: после 25 секунд на странице или когда прокрутили
+ * 40% страницы, что раньше. Влетает с отскоком и дальше раз в пару
  * секунд подпрыгивает, пока его не закроют. Закрытие помним на время сессии,
  * чтобы он не возвращался при каждом переходе на главную.
  */
@@ -22,8 +24,17 @@ export default function ContactPopup() {
     } catch {
       /* хранилище закрыто - просто покажем */
     }
-    const t = setTimeout(() => setVisible(true), SHOW_AFTER_MS);
-    return () => clearTimeout(t);
+    const show = () => setVisible(true);
+    const t = setTimeout(show, SHOW_AFTER_MS);
+    const onScroll = () => {
+      const max = document.documentElement.scrollHeight - window.innerHeight;
+      if (max > 0 && window.scrollY / max >= SHOW_AFTER_SCROLL) show();
+    };
+    window.addEventListener('scroll', onScroll, { passive: true });
+    return () => {
+      clearTimeout(t);
+      window.removeEventListener('scroll', onScroll);
+    };
   }, []);
 
   function close() {
@@ -56,7 +67,7 @@ export default function ContactPopup() {
         </button>
         <p className="pr-8 font-display text-lg font-semibold leading-snug">Проще позвонить</p>
         <p className="mb-3 mt-1 text-sm text-ink-soft">Расскажем про смены и поможем выбрать сервис.</p>
-        <ContactActions ringing />
+        <ContactActions ringing stacked />
       </div>
     </div>
   );

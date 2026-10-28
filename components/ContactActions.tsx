@@ -21,14 +21,14 @@ function TelegramIcon() {
  * lib/site.ts, не показываем. Клики считает CtaClicks на уровне документа,
  * поэтому здесь обычные ссылки без обработчиков.
  */
-export default function ContactActions({ ringing = false }: { ringing?: boolean }) {
+export default function ContactActions({ ringing = false, stacked = false }: { ringing?: boolean; stacked?: boolean }) {
   if (!CONTACTS.phone && !CONTACTS.telegram) return null;
   return (
-    <div className="flex flex-col gap-2 sm:flex-row">
+    <div className={`flex flex-col gap-2 ${stacked ? '' : 'sm:flex-row'}`}>
       {CONTACTS.phone && CONTACTS.phoneHref && (
         <a
           href={`tel:${CONTACTS.phoneHref}`}
-          className="tap flex flex-1 items-center justify-center gap-2 rounded-xl bg-amber px-4 font-semibold text-white shadow-card transition-colors hover:bg-amber-deep"
+          className="tap flex flex-1 items-center justify-center gap-2 whitespace-nowrap rounded-xl bg-amber px-4 font-semibold text-white shadow-card transition-colors hover:bg-amber-deep"
         >
           <PhoneIcon className={ringing ? 'phone-ring' : ''} />
           {CONTACTS.phone}
@@ -39,7 +39,7 @@ export default function ContactActions({ ringing = false }: { ringing?: boolean 
           href={CONTACTS.telegram}
           target="_blank"
           rel="noopener noreferrer"
-          className="tap flex flex-1 items-center justify-center gap-2 rounded-xl border-2 border-amber px-4 font-semibold text-amber transition-colors hover:bg-amber-soft"
+          className="tap flex flex-1 items-center justify-center gap-2 whitespace-nowrap rounded-xl border-2 border-amber px-4 font-semibold text-amber transition-colors hover:bg-amber-soft"
         >
           <TelegramIcon />
           Написать в Telegram
