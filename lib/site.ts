@@ -19,7 +19,7 @@ export const CONTACTS: {
 } = {
   phone: '+7 904 999-34-12',
   phoneHref: '+79049993412',
-  telegram: null,
+  telegram: 'https://t.me/Nashiludi1',
   whatsapp: null,
 };
 

@@ -1,5 +1,6 @@
 'use client';
 
+import ContactActions from '@/components/ContactActions';
 import { useEffect, useRef, useState } from 'react';
 import Link from 'next/link';
 import { SERVICES } from '@/lib/data/services';
@@ -104,7 +105,12 @@ export default function Quiz() {
   if (done) {
     return (
       <div ref={cardRef} className="step-in scroll-mt-24 rounded-2xl border border-line bg-card p-5 shadow-card">
-        <h2 className="font-display text-xl font-semibold">Вам подойдёт</h2>
+        <div className="contact-popup rounded-2xl bg-graphite p-4 text-white">
+          <p className="font-display text-lg font-semibold">Готово. Проще позвонить</p>
+          <p className="mb-3 mt-1 text-sm opacity-80">Позвоните или напишите: подскажем смену под ваши ответы.</p>
+          <ContactActions ringing />
+        </div>
+        <h2 className="mt-5 font-display text-xl font-semibold">Вам подойдёт</h2>
         <div className="mt-4 grid gap-3 sm:grid-cols-2">
           {recommendations.map((s, i) => (
             <div key={s.slug} className={`reveal reveal-${i + 1} rounded-2xl border-2 p-4 ${i === 0 ? 'border-amber bg-amber-soft' : 'border-line'}`}>

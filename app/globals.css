@@ -133,3 +133,72 @@ fieldset {
     }
   }
 }
+
+/* Контакты: попап влетает с отскоком и подпрыгивает, трубка звенит */
+@media (prefers-reduced-motion: no-preference) {
+  .contact-popup {
+    animation: popup-bounce-in 0.9s cubic-bezier(0.28, 0.84, 0.42, 1) both;
+  }
+
+  .contact-popup-hop {
+    animation: popup-hop 5s ease-in-out 1.5s infinite;
+  }
+
+  .phone-ring {
+    transform-origin: 50% 50%;
+    animation: phone-ring 2.4s ease-in-out infinite;
+  }
+
+  @keyframes popup-bounce-in {
+    0% {
+      opacity: 0;
+      transform: translateY(120px) scale(0.9);
+    }
+    55% {
+      opacity: 1;
+      transform: translateY(-18px) scale(1.02);
+    }
+    75% {
+      transform: translateY(8px);
+    }
+    90% {
+      transform: translateY(-4px);
+    }
+    100% {
+      transform: translateY(0);
+    }
+  }
+
+  @keyframes popup-hop {
+    0%,
+    70%,
+    100% {
+      transform: translateY(0);
+    }
+    78% {
+      transform: translateY(-14px);
+    }
+    86% {
+      transform: translateY(0);
+    }
+    92% {
+      transform: translateY(-5px);
+    }
+  }
+
+  @keyframes phone-ring {
+    0%,
+    55%,
+    100% {
+      transform: rotate(0);
+    }
+    10%,
+    30% {
+      transform: rotate(-16deg);
+    }
+    20%,
+    40% {
+      transform: rotate(16deg);
+    }
+  }
+}

@@ -1,5 +1,6 @@
 'use client';
 
+import ContactActions from '@/components/ContactActions';
 import Link from 'next/link';
 import { useEffect, useMemo, useRef, useState } from 'react';
 import { CITIES } from '@/lib/data/cities';
@@ -412,6 +413,10 @@ export default function LeadForm() {
               В рабочее время с 9:00 до 21:00 по вашему городу. Подготовьте паспорт: с ним подключение
               пройдёт быстрее.
             </p>
+            <div className="mx-auto mt-4 max-w-sm text-left">
+              <p className="mb-2 text-center text-sm text-ink-soft">Не хотите ждать? Свяжитесь сами:</p>
+              <ContactActions ringing />
+            </div>
             {IS_DEMO && (
               <p className="mx-auto mt-3 max-w-sm rounded-lg bg-amber-soft px-3 py-2 text-xs text-ink-soft">
                 Это тестовый стенд: заявка не отправляется. На рабочем сайте она уходит в колл-центр.

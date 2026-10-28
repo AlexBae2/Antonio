@@ -3,6 +3,7 @@ import Link from 'next/link';
 import JsonLd from '@/components/JsonLd';
 import LeadForm from '@/components/LeadForm';
 import FaqBlock from '@/components/FaqBlock';
+import ContactPopup from '@/components/ContactPopup';
 import Disclaimer from '@/components/Disclaimer';
 import { SERVICES, roleTag } from '@/lib/data/services';
 import { ROLES } from '@/lib/data/roles';
@@ -196,6 +197,7 @@ export default function HomePage() {
           url: SITE_URL,
         }}
       />
+      <ContactPopup />
     </>
   );
 }
