@@ -15,7 +15,7 @@ export async function POST(req: NextRequest) {
     return NextResponse.json({ ok: false }, { status: 400 });
   }
   const kind = String(body.kind || '').slice(0, 20);
-  if (!['tel', 'telegram', 'whatsapp'].includes(kind)) {
+  if (!['tel', 'telegram', 'max', 'whatsapp'].includes(kind)) {
     return NextResponse.json({ ok: false }, { status: 400 });
   }
   getDb()

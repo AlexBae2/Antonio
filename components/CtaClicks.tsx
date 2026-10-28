@@ -16,11 +16,11 @@ import { useEffect } from 'react';
 
 const MESSENGER = /^https?:\/\/(t\.me|telegram\.me|max\.ru|wa\.me)\//i;
 
-function kindOf(href: string): { kind: 'tel' | 'telegram' | 'whatsapp'; goal: string } | null {
+function kindOf(href: string): { kind: 'tel' | 'telegram' | 'max' | 'whatsapp'; goal: string } | null {
   if (href.startsWith('tel:')) return { kind: 'tel', goal: 'call_click' };
   if (!MESSENGER.test(href)) return null;
-  const isWhatsapp = /^https?:\/\/wa\.me\//i.test(href);
-  return { kind: isWhatsapp ? 'whatsapp' : 'telegram', goal: 'messenger_click' };
+  const kind = /^https?:\/\/wa\.me\//i.test(href) ? 'whatsapp' : /^https?:\/\/max\.ru\//i.test(href) ? 'max' : 'telegram';
+  return { kind, goal: 'messenger_click' };
 }
 
 function readClientId(): string {

@@ -15,11 +15,13 @@ export const CONTACTS: {
   phone: string | null;
   phoneHref: string | null;
   telegram: string | null;
+  max: string | null;
   whatsapp: string | null;
 } = {
   phone: '+7 904 999-34-12',
   phoneHref: '+79049993412',
   telegram: 'https://t.me/Nashiludi1',
+  max: 'https://max.ru/u/f9LHodD0cOKL1JeJZxwY25ZRQDRaAGMccztSkQb2-m8IzUzYZvTs28wOzFA',
   whatsapp: null,
 };
 

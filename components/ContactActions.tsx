@@ -22,7 +22,7 @@ function TelegramIcon() {
  * поэтому здесь обычные ссылки без обработчиков.
  */
 export default function ContactActions({ ringing = false, stacked = false }: { ringing?: boolean; stacked?: boolean }) {
-  if (!CONTACTS.phone && !CONTACTS.telegram) return null;
+  if (!CONTACTS.phone && !CONTACTS.telegram && !CONTACTS.max) return null;
   return (
     <div className={`flex flex-col gap-2 ${stacked ? '' : 'sm:flex-row'}`}>
       {CONTACTS.phone && CONTACTS.phoneHref && (
@@ -43,6 +43,19 @@ export default function ContactActions({ ringing = false, stacked = false }: { r
         >
           <TelegramIcon />
           Написать в Telegram
+        </a>
+      )}
+      {CONTACTS.max && (
+        <a
+          href={CONTACTS.max}
+          target="_blank"
+          rel="noopener noreferrer"
+          className="tap flex flex-1 items-center justify-center gap-2 whitespace-nowrap rounded-xl border-2 border-amber px-4 font-semibold text-amber transition-colors hover:bg-amber-soft"
+        >
+          <span className="rounded bg-amber px-1.5 text-xs font-bold leading-5 text-white" aria-hidden>
+            MAX
+          </span>
+          Написать в MAX
         </a>
       )}
     </div>

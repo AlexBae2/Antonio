@@ -12,7 +12,7 @@ export default function StickyBar() {
         {CONTACTS.phone && (
           <a
             href={`tel:${CONTACTS.phone.replace(/[^+\d]/g, '')}`}
-            className="tap flex flex-1 items-center justify-center rounded-xl border-2 border-amber font-semibold text-amber"
+            className="tap flex flex-1 items-center justify-center rounded-xl border-2 border-amber text-sm font-semibold text-amber"
           >
             Позвонить
           </a>
@@ -30,9 +30,20 @@ export default function StickyBar() {
             </svg>
           </a>
         )}
+        {CONTACTS.max && (
+          <a
+            href={CONTACTS.max}
+            target="_blank"
+            rel="noopener noreferrer"
+            aria-label="Написать в MAX"
+            className="tap flex w-12 flex-none items-center justify-center rounded-xl border-2 border-amber text-xs font-bold text-amber"
+          >
+            MAX
+          </a>
+        )}
         <Link
           href="/#zayavka"
-          className="tap flex flex-1 items-center justify-center rounded-xl bg-amber font-semibold text-white"
+          className="tap flex flex-1 items-center justify-center whitespace-nowrap rounded-xl bg-amber text-sm font-semibold text-white"
         >
           Оставить заявку
         </Link>
