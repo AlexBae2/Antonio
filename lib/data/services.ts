@@ -29,7 +29,23 @@ export interface Service {
   priority: number;
 }
 
-export const SERVICES: Service[] = [
+/**
+ * Сервисы, снятые с сайта 28.10.2026 по решению владельца. Данные оставлены
+ * в ALL_SERVICES, чтобы старые заявки и ссылки читались, но в списки, карту
+ * сайта и роуты они не попадают. Старые URL уходят на главную редиректом
+ * из next.config.mjs.
+ */
+export const HIDDEN_SERVICE_SLUGS: readonly string[] = [
+  'kurier-zakazy-iz-magazinov',
+  'kurier-express-dostavka',
+  'kurier-zdorovoe-pitanie',
+  'kurier-produktovye-seti',
+  'kurier-posylki-i-gruzy',
+  'voditel-taksi',
+  'kurier-dostavka-supermarket',
+];
+
+const ALL_SERVICES: Service[] = [
   {
     slug: 'kurier-dostavka-edy',
     brand: 'Яндекс Еда',
@@ -447,6 +463,8 @@ export const SERVICES: Service[] = [
     priority: 11,
   },
 ];
+
+export const SERVICES: Service[] = ALL_SERVICES.filter((s) => !HIDDEN_SERVICE_SLUGS.includes(s.slug));
 
 export function getService(slug: string): Service | undefined {
   return SERVICES.find((s) => s.slug === slug);

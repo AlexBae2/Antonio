@@ -16,7 +16,7 @@ export const CITIES: City[] = [
     name: 'Москва',
     namePrepositional: 'в Москве',
     yandexRegionId: 213,
-    services: ['kurier-dostavka-edy', 'kurier-zakazy-iz-magazinov', 'kurier-express-dostavka'],
+    services: ['kurier-dostavka-edy'],
     localNote:
       'Самый большой объём заказов в стране: плотность ресторанов и дарксторов позволяет брать заказы без простоев почти в любом районе внутри МКАД.',
   },
@@ -25,7 +25,7 @@ export const CITIES: City[] = [
     name: 'Санкт-Петербург',
     namePrepositional: 'в Санкт-Петербурге',
     yandexRegionId: 2,
-    services: ['kurier-dostavka-edy', 'kurier-zakazy-iz-magazinov', 'kurier-express-dostavka'],
+    services: ['kurier-dostavka-edy'],
     localNote:
       'Второй по объёму рынок доставки: высокая плотность заказов в центре и спальных районах, развитая сеть дарксторов.',
   },
@@ -34,7 +34,7 @@ export const CITIES: City[] = [
     name: 'Екатеринбург',
     namePrepositional: 'в Екатеринбурге',
     yandexRegionId: 54,
-    services: ['kurier-dostavka-edy', 'kurier-zakazy-iz-magazinov', 'kurier-express-dostavka'],
+    services: ['kurier-dostavka-edy'],
     localNote:
       'Крупнейший рынок доставки на Урале: стабильный поток заказов в центре и на Уралмаше, растущая сеть дарксторов.',
   },
@@ -43,7 +43,7 @@ export const CITIES: City[] = [
     name: 'Новосибирск',
     namePrepositional: 'в Новосибирске',
     yandexRegionId: 65,
-    services: ['kurier-dostavka-edy', 'kurier-zakazy-iz-magazinov', 'kurier-express-dostavka'],
+    services: ['kurier-dostavka-edy'],
     localNote:
       'Самый большой рынок доставки в Сибири: заказы концентрируются в центре, на левом берегу и в Академгородке.',
   },
@@ -52,7 +52,7 @@ export const CITIES: City[] = [
     name: 'Казань',
     namePrepositional: 'в Казани',
     yandexRegionId: 43,
-    services: ['kurier-dostavka-edy', 'kurier-zakazy-iz-magazinov', 'kurier-express-dostavka'],
+    services: ['kurier-dostavka-edy'],
     localNote:
       'Активно растущий рынок доставки: высокий спрос в центре, Ново-Савиновском и Вахитовском районах.',
   },

@@ -14,14 +14,14 @@ interface Answers {
 
 function recommend(a: Answers): string[] {
   if (a.place === 'indoor') return ['sborshchik-marketpleys', 'smennaya-podrabotka'];
-  if (a.transport === 'car') return ['kurier-posylki-i-gruzy', 'voditel-taksi'];
+  if (a.transport === 'car') return ['kurier-dostavka-edy', 'kurier-produkty-darkstore'];
   if (a.time === 'part') {
     return a.priority === 'fast'
       ? ['kurier-produkty-darkstore', 'kurier-dostavka-edy']
       : ['kurier-dostavka-edy', 'kurier-produkty-darkstore'];
   }
-  if (a.priority === 'stable') return ['kurier-express-dostavka', 'kurier-dostavka-supermarket'];
-  return ['kurier-dostavka-edy', 'kurier-zakazy-iz-magazinov'];
+  if (a.priority === 'stable') return ['smennaya-podrabotka', 'kurier-dostavka-edy'];
+  return ['kurier-dostavka-edy', 'kurier-produkty-darkstore'];
 }
 
 const QUESTIONS: {

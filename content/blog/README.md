@@ -53,4 +53,4 @@ author: "redakcia"
 Роли: `/peshiy-kurier/`, `/velo-kurier/`, `/avto-kurier/`, `/sborshchik-zakazov/`
 
 Прочее: `/kalkulyator-dohoda/`, `/podbor/`, `/voprosy/`, `/slovar-terminov/`,
-`/metodologiya/`, `/otzyvy/`, `/sravnenie/lavka-ili-eda/`, `/sravnenie/kuper-ili-samokat/`
+`/metodologiya/`, `/otzyvy/`, `/sravnenie/lavka-ili-eda/`

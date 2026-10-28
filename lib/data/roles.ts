@@ -18,7 +18,7 @@ export const ROLES: Role[] = [
     description:
       'Доставка заказов пешком в своём районе. Не нужен транспорт и вложения: только смартфон и удобная обувь. Самый простой способ начать в доставке.',
     suitedFor: ['студентам', 'тем, кто хочет начать без вложений', 'тем, кто любит ходить'],
-    services: ['kurier-dostavka-edy', 'kurier-produkty-darkstore', 'kurier-express-dostavka', 'kurier-zakazy-iz-magazinov', 'kurier-dostavka-supermarket'],
+    services: ['kurier-dostavka-edy', 'kurier-produkty-darkstore'],
     tldr: [
       'Старт без вложений: нужен только смартфон',
       '10-20 тысяч шагов за смену: работа для активных',
@@ -43,7 +43,7 @@ export const ROLES: Role[] = [
     description:
       'Доставка на велосипеде или электровелосипеде: больше заказов в час, чем пешком, и шире радиус. В части сервисов транспорт выдают.',
     suitedFor: ['тем, у кого есть велосипед', 'тем, кто хочет больше заказов в час', 'активным'],
-    services: ['kurier-dostavka-edy', 'kurier-produkty-darkstore', 'kurier-express-dostavka', 'kurier-dostavka-supermarket'],
+    services: ['kurier-dostavka-edy', 'kurier-produkty-darkstore'],
     tldr: [
       'Больше заказов в час, чем у пешего курьера',
       'В ряде дарксторов выдают электровелосипед',
@@ -64,7 +64,7 @@ export const ROLES: Role[] = [
     description:
       'Доставка на своём автомобиле: крупные заказы, большой радиус, работа в любую погоду. Нужны права категории B и авто.',
     suitedFor: ['владельцам авто', 'тем, кто хочет крупные заказы', 'тем, кто не хочет зависеть от погоды'],
-    services: ['kurier-dostavka-edy', 'kurier-zakazy-iz-magazinov', 'kurier-zdorovoe-pitanie', 'kurier-dostavka-supermarket'],
+    services: ['kurier-dostavka-edy'],
     tldr: [
       'Крупные заказы: продуктовые корзины, дальние адреса',
       'Работа в любую погоду в комфорте',
@@ -85,7 +85,7 @@ export const ROLES: Role[] = [
     description:
       'Сборка заказов в магазине, дарксторе или на складе: приёмка товара, комплектация по списку, упаковка. Работа в помещении, без поездок по городу.',
     suitedFor: ['тем, кто не хочет ездить по городу', 'тем, кто предпочитает работу в помещении', 'без опыта'],
-    services: ['sborshchik-marketpleys', 'kurier-express-dostavka', 'kurier-produkty-darkstore', 'kurier-zdorovoe-pitanie'],
+    services: ['sborshchik-marketpleys', 'kurier-produkty-darkstore'],
     tldr: [
       'Работа в помещении: склад, даркстор или магазин',
       'Сборка заказов по заданию в терминале',

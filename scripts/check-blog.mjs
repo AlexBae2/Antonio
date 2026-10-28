@@ -47,7 +47,7 @@ const bySlug = new Map(posts.map((p) => [p.slug, p]));
 const routes = new Set([
   '/', '/kalkulyator-dohoda/', '/podbor/', '/blog/', '/voprosy/', '/slovar-terminov/',
   '/otzyvy/', '/o-nas/', '/metodologiya/', '/rekvizity/', '/policy/',
-  '/sravnenie/lavka-ili-eda/', '/sravnenie/kuper-ili-samokat/',
+  '/sravnenie/lavka-ili-eda/',
 ]);
 for (const s of [...dataSlugs('services.ts'), ...dataSlugs('roles.ts'), ...dataSlugs('cities.ts')]) {
   routes.add(`/${s}/`);
